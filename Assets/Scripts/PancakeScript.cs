@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
-public class PancakeScript : MonoBehaviour
+public class PancakeScript : MonoBehaviour, IPointerDownHandler
 {
     public TMP_Text tmp;
     public GameDataScript gameData;
@@ -18,14 +19,10 @@ public class PancakeScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                gameData.score += 1;
-                tmp.text = "Блины: " + gameData.score;
-            }
-        }
+    }
+    public void OnPointerDown(PointerEventData data)
+    {
+        gameData.score += 1;
+        tmp.text = "Блины: " + gameData.score;
     }
 }
