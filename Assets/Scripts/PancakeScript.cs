@@ -9,11 +9,10 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
 {
     public TMP_Text tmp;
     public GameDataScript gameData;
-    private Touch touch;
     // Start is called before the first frame update
     void Start()
     {
-
+        tmp.text = "Блины: " + gameData.score;
     }
 
     // Update is called once per frame

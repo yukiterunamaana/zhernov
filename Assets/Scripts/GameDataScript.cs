@@ -7,4 +7,13 @@ public class GameDataScript : ScriptableObject
 {
     // Start is called before the first frame update
     public int score;
+    public Screen currentScreen = Screen.Grind;
+}
+
+public enum Screen
+{
+    Tasks,
+    Grind,
+    Map,
+    Shop
 }
