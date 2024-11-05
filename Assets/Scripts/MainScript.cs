@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainScript : MonoBehaviour
 {
-    public GameDataScript data;
+    public GameDataScript gameData;
     public GameObject TasksCanvas;
     public GameObject GrindCanvas;
     public GameObject MapCanvas;
@@ -18,7 +19,7 @@ public class MainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadScrene(data.currentScreen);
+        LoadScrene(gameData.currentScreen);
     }
 
     // Update is called once per frame
@@ -37,10 +38,6 @@ public class MainScript : MonoBehaviour
         GrindCanvas.SetActive(false);
         MapCanvas.SetActive(false);
         ShopCanvas.SetActive(false);
-        TasksButton.gameObject.SetActive(true);
-        GrindButton.gameObject.SetActive(true);
-        MapButton.gameObject.SetActive(true);
-        ShopButton.gameObject.SetActive(true);
         switch (screen) {
             case Screen.Tasks:
                 TasksButton.gameObject.SetActive(false);
@@ -57,8 +54,9 @@ public class MainScript : MonoBehaviour
             case Screen.Shop:
                 ShopButton.gameObject.SetActive(false);
                 ShopCanvas.SetActive(true);
+                ShopCanvas.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text= "Блины: " + gameData.score;
                 break;
         }
-        data.currentScreen = screen;
+        gameData.currentScreen = screen;
     }
 }

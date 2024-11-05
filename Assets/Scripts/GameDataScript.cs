@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameDataScript : ScriptableObject
 {
     // Start is called before the first frame update
-    public int score;
+    public int score = 0;
     public Screen currentScreen = Screen.Grind;
 }
 
