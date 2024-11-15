@@ -7,8 +7,11 @@ using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour, IPointerDownHandler, IPointerMoveHandler, IPointerUpHandler
 {
+    public int radius;
     Texture2D texture;
     bool isMoving = false;
+    int green = 255;
+    int greenDirection = -1;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,14 +34,13 @@ public class CanvasScript : MonoBehaviour, IPointerDownHandler, IPointerMoveHand
 
     void Paint(PointerEventData data)
     {
-        int radius = 20;
         for (int i = -radius; i <= radius; ++i)
         {
             for (int j = -radius; j <= radius; ++j)
             {
                 if (i * i + j * j <= radius * radius)
                     texture.SetPixel((int)(data.position.x - transform.position.x) + 300 + i,
-                        (int)(data.position.y - transform.position.y) + 300 + j, Color.cyan);
+                        (int)(data.position.y - transform.position.y) + 300 + j, new Color(0, (float)green/255, 1, 1));
             }
         }
         texture.Apply();
@@ -51,7 +53,16 @@ public class CanvasScript : MonoBehaviour, IPointerDownHandler, IPointerMoveHand
     }
     public void OnPointerMove(PointerEventData data)
     {
-        if (isMoving) Paint(data);
+        if (isMoving) 
+        {
+            green += greenDirection * 5;
+            print(green);
+            if (green == 0 || green == 255)
+            {
+                greenDirection *= -1;
+            }
+            Paint(data); 
+        }
     }
     public void OnPointerUp(PointerEventData data)
     {
@@ -63,6 +74,8 @@ public class CanvasScript : MonoBehaviour, IPointerDownHandler, IPointerMoveHand
                 texture.SetPixel(i, j, new Color(0, 0, 0, 1));
             }
         }
+        green = 255;
+        greenDirection = -1;
         texture.Apply();
     }
 }
