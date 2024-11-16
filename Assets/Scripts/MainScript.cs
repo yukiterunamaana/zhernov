@@ -50,6 +50,7 @@ public class MainScript : MonoBehaviour
             case Screen.Grind:
                 GrindButton.gameObject.SetActive(false);
                 GrindCanvas.SetActive(true);
+                GrindCanvas.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Блины: " + gameData.score;
                 break;
             case Screen.Map:
                 MapButton.gameObject.SetActive(false);

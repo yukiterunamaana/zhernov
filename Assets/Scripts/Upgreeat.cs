@@ -9,6 +9,9 @@ public class Upgreeat : MonoBehaviour
     public GameObject ShopScreen;
     public GameObject TextPan;
     public GameObject TextCost;
+    public TMP_Text tmp;
+    public TMP_Text text;
+    int cost = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -23,11 +26,13 @@ public class Upgreeat : MonoBehaviour
     }
     public void something()
     {
-        if (gameData.score >= 100)
+        if (gameData.score >= cost)
         {
-            gameData.score -= 100;
+            gameData.score -= cost;
             gameData.mod += 1;
-            Update();
+            cost = (int)(cost*1.35);
+            tmp.text = "Блины: " + gameData.score;
+            text.text = cost.ToString();
         }
 
     }
