@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class ListFill : MonoBehaviour
 {
-    public Description prefab;
-    public 
 
     // Start is called before the first frame update
     void Start()
