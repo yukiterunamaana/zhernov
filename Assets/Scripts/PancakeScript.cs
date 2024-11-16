@@ -9,6 +9,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
 {
     public TMP_Text tmp;
     public GameDataScript gameData;
+    //public GameDataScript Mod;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        gameData.score += 1;
+        gameData.score += 1 + gameData.mod;
         tmp.text = "Блины: " + gameData.score;
     }
 }
