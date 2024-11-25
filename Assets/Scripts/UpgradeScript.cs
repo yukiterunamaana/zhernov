@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class Upgreeat : MonoBehaviour
+public class UpgradeScript : MonoBehaviour, IPointerDownHandler
 {
     public GameDataScript gameData;
-    public GameObject ShopScreen;
-    public GameObject TextPan;
-    public GameObject TextCost;
     public TMP_Text tmp;
     public TMP_Text text;
     int cost = 100;
@@ -16,7 +13,8 @@ public class Upgreeat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cost = (int)(100 * Mathf.Pow(1.35f, gameData.mod));
+        text.text = cost.ToString();
     }
 
     // Update is called once per frame
@@ -24,7 +22,7 @@ public class Upgreeat : MonoBehaviour
     {
         //TextCost.text = (100 * gameData.mod).ToString();
     }
-    public void something()
+    public void OnPointerDown(PointerEventData data)
     {
         if (gameData.score >= cost)
         {
