@@ -32,6 +32,38 @@ public class MainScript : MonoBehaviour
         }
     }
 
+    private void OnValidate()
+    {
+        if (TasksCanvas.activeSelf)
+        {
+            TasksButton.gameObject.SetActive(false);
+            GrindButton.gameObject.SetActive(true);
+            MapButton.gameObject.SetActive(true);
+            ShopButton.gameObject.SetActive(true);
+        }
+        else if (GrindCanvas.activeSelf)
+        {
+            TasksButton.gameObject.SetActive(true);
+            GrindButton.gameObject.SetActive(false);
+            MapButton.gameObject.SetActive(true);
+            ShopButton.gameObject.SetActive(true);
+        }
+        else if (MapCanvas.activeSelf)
+        {
+            TasksButton.gameObject.SetActive(true);
+            GrindButton.gameObject.SetActive(true);
+            MapButton.gameObject.SetActive(false);
+            ShopButton.gameObject.SetActive(true);
+        }
+        else if (ShopCanvas.activeSelf)
+        {
+            TasksButton.gameObject.SetActive(true);
+            GrindButton.gameObject.SetActive(true);
+            MapButton.gameObject.SetActive(true);
+            ShopButton.gameObject.SetActive(false);
+        }
+    }
+
     public void LoadScrene(Screen screen)
     {
         TasksButton.gameObject.SetActive(true);
@@ -59,7 +91,7 @@ public class MainScript : MonoBehaviour
             case Screen.Shop:
                 ShopButton.gameObject.SetActive(false);
                 ShopCanvas.SetActive(true);
-                ShopCanvas.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text= "Блины: " + gameData.score;
+                ShopCanvas.transform.GetChild(0).GetChild(2).GetComponent<TMP_Text>().text= "Блины: " + gameData.score;
                 break;
         }
         gameData.currentScreen = screen;
