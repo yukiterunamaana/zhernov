@@ -11,7 +11,8 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     public GameDataScript gameData;
     public TMP_Text tmp;
     public TMP_Text text;
-    int cost = 100;
+    public int cost = 100;
+    public string name_button;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +28,41 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        if (gameData.score >= cost)
+        switch (name_button)
         {
-            gameData.score -= cost;
-            gameData.mod += 1;
-            cost = (int)(cost*1.35);
-            tmp.text = "Блины: " + gameData.score;
-            text.text = cost.ToString();
+            case  "hand":
+                if (gameData.score >= cost)
+                {
+                    gameData.score -= cost;
+                    gameData.mod += 1;
+                    cost = (int)(cost * 1.35);
+                    tmp.text = "Блины: " + gameData.score;
+                    text.text = cost.ToString();
+                }
+                break;
+
+            case  "lizard":
+                if (gameData.score >= cost)
+                {
+                    gameData.score -= cost;
+                    gameData.PPS++;
+                    cost = (int)(cost * 1.35);
+                    tmp.text = "Блины: " + gameData.score;
+                    text.text = cost.ToString();
+                }
+                break;
+
+            case "bank":
+                if (gameData.score >= cost)
+                {
+                    gameData.score -= cost;
+                    gameData.add_mod = 0.1;
+                    cost = (int)(cost * 1.35);
+                    tmp.text = "Блины: " + gameData.score;
+                    text.text = cost.ToString();
+                }
+                break;
         }
+        
     }
 }

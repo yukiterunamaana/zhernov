@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using System.Timers;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using static Unity.Burst.Intrinsics.X86.Avx;
+using static System.Net.Mime.MediaTypeNames;
 
 public class MainScript : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class MainScript : MonoBehaviour
     public Button ShopButton;
     public GameDataScript GD;
     private float timer = 0f;
+    public TMP_Text score_main;
+    public TMP_Text score_shop;
 
     // Start is called before the first frame update
     void Start()
@@ -37,14 +40,16 @@ public class MainScript : MonoBehaviour
         if (timer >= 1f) // Если прошла 1 секунда
         {
             timer = 0f; // Сбрасываем таймер
-            gameData.score += 1 * gameData.PPS ;
-            //Debug.Log("Функция вызвана в: " + Time.time);
-            // Здесь размещаете код, который хотите выполнять каждую секунду
+            gameData.score += 1 * gameData.PPS;
+            score_main.text = "Блины: " + gameData.score;
+            score_shop.text = "Блины: " + gameData.score;
         }
         if (gameData.Klick == 100)
         {
             gameData.score += (int)(gameData.add_mod * (float)gameData.score);
             gameData.Klick = 0;
+            score_main.text = "Блины: " + gameData.score;
+            score_shop.text = "Блины: " + gameData.score;
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
