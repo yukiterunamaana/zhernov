@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class MainScript : MonoBehaviour
 {
@@ -15,6 +20,8 @@ public class MainScript : MonoBehaviour
     public Button GrindButton;
     public Button MapButton;
     public Button ShopButton;
+    public GameDataScript GD;
+    private float timer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +32,27 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime; // Увеличиваем таймер
+
+        if (timer >= 1f) // Если прошла 1 секунда
+        {
+            timer = 0f; // Сбрасываем таймер
+            gameData.score += 1 * gameData.PPS ;
+            //Debug.Log("Функция вызвана в: " + Time.time);
+            // Здесь размещаете код, который хотите выполнять каждую секунду
+        }
+        if (gameData.Klick == 100)
+        {
+            gameData.score += (int)(gameData.add_mod * (float)gameData.score);
+            gameData.Klick = 0;
+        }
+
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
             activity.Call<bool>("moveTaskToBack", true);
         }
+
     }
 
     private void OnValidate()

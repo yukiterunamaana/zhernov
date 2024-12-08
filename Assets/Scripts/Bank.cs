@@ -6,13 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-public class UpgradeScript : MonoBehaviour, IPointerDownHandler
+public class Bank : MonoBehaviour, IPointerDownHandler
 {
     public GameDataScript gameData;
     public TMP_Text tmp;
     public TMP_Text text;
     int cost = 100;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,15 +22,15 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-        //TextCost.text = (100 * gameData.mod).ToString();
+
     }
     public void OnPointerDown(PointerEventData data)
     {
         if (gameData.score >= cost)
         {
             gameData.score -= cost;
-            gameData.mod += 1;
-            cost = (int)(cost*1.35);
+            gameData.add_mod = 0.1;
+            cost = (int)(cost * 1.35);
             tmp.text = "Блины: " + gameData.score;
             text.text = cost.ToString();
         }

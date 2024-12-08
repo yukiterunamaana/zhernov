@@ -24,5 +24,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     {
         gameData.score += 1 + gameData.mod;
         tmp.text = "Блины: " + gameData.score;
+        gameData.Klick++;
     }
 }
