@@ -9,7 +9,7 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 public class UpgradeScript : MonoBehaviour, IPointerDownHandler
 {
     public GameDataScript gameData;
-    public TMP_Text tmp;
+    TMP_Text score_tmp;
     public TMP_Text text;
     public int cost = 100;
     public string name_button;
@@ -19,6 +19,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     {
         cost = (int)(100 * Mathf.Pow(1.35f, gameData.mod));
         text.text = cost.ToString();
+        score_tmp = Camera.main.GetComponent<MainScript>().score_tmp;
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     gameData.score -= cost;
                     gameData.mod += 1;
                     cost = (int)(cost * 1.35);
-                    tmp.text = "Блины: " + gameData.score;
+                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
                     text.text = cost.ToString();
                 }
                 break;
@@ -47,7 +48,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     gameData.score -= cost;
                     gameData.PPS++;
                     cost = (int)(cost * 1.35);
-                    tmp.text = "Блины: " + gameData.score;
+                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
                     text.text = cost.ToString();
                 }
                 break;
@@ -56,9 +57,9 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                 if (gameData.score >= cost)
                 {
                     gameData.score -= cost;
-                    gameData.add_mod = 0.1;
+                    gameData.add_mod += 0.1;
                     cost = (int)(cost * 1.35);
-                    tmp.text = "Блины: " + gameData.score;
+                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
                     text.text = cost.ToString();
                 }
                 break;

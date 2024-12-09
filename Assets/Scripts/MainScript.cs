@@ -21,16 +21,20 @@ public class MainScript : MonoBehaviour
     public Button GrindButton;
     public Button MapButton;
     public Button ShopButton;
-    public GameDataScript GD;
     private float timer = 0f;
-    public TMP_Text score_main;
-    public TMP_Text score_shop;
+    public TMP_Text score_tmp;
 
     // Start is called before the first frame update
     void Start()
     {
         LoadScrene(gameData.currentScreen);
-    }
+        gameData.score = 0;
+        gameData.mod = 0;
+        gameData.PPS = 0;
+        gameData.Klick = 0;
+        gameData.add_mod = 0;
+        gameData.currentScreen = Screen.Grind;
+}
 
     // Update is called once per frame
     void Update()
@@ -41,15 +45,13 @@ public class MainScript : MonoBehaviour
         {
             timer = 0f; // Сбрасываем таймер
             gameData.score += 1 * gameData.PPS;
-            score_main.text = "Блины: " + gameData.score;
-            score_shop.text = "Блины: " + gameData.score;
+            score_tmp.text = "<sprite=0> " + gameData.score.ToString();
         }
         if (gameData.Klick == 100)
         {
             gameData.score += (int)(gameData.add_mod * (float)gameData.score);
             gameData.Klick = 0;
-            score_main.text = "Блины: " + gameData.score;
-            score_shop.text = "Блины: " + gameData.score;
+            score_tmp.text = "<sprite=0> " + gameData.score.ToString();
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -110,7 +112,6 @@ public class MainScript : MonoBehaviour
             case Screen.Grind:
                 GrindButton.gameObject.SetActive(false);
                 GrindCanvas.SetActive(true);
-                GrindCanvas.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Блины: " + gameData.score;
                 break;
             case Screen.Map:
                 MapButton.gameObject.SetActive(false);
@@ -119,7 +120,6 @@ public class MainScript : MonoBehaviour
             case Screen.Shop:
                 ShopButton.gameObject.SetActive(false);
                 ShopCanvas.SetActive(true);
-                ShopCanvas.transform.GetChild(0).GetChild(2).GetComponent<TMP_Text>().text= "Блины: " + gameData.score;
                 break;
         }
         gameData.currentScreen = screen;
