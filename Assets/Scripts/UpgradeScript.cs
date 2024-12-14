@@ -5,7 +5,6 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 public class UpgradeScript : MonoBehaviour, IPointerDownHandler
 {
     public GameDataScript gameData;

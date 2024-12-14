@@ -6,9 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Timers;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static System.Net.Mime.MediaTypeNames;
 
 public class MainScript : MonoBehaviour
 {
