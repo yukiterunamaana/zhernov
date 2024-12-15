@@ -10,16 +10,20 @@ using System.Timers;
 public class MainScript : MonoBehaviour
 {
     public GameDataScript gameData;
+    public GameObject total_fall;
     public GameObject TasksCanvas;
     public GameObject GrindCanvas;
     public GameObject MapCanvas;
     public GameObject ShopCanvas;
+    public GameObject instance;
     public Button TasksButton;
     public Button GrindButton;
     public Button MapButton;
     public Button ShopButton;
+    public Canvas canvas;
     private float timer = 0f;
     public TMP_Text score_tmp;
+    public bool scr = true;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +42,17 @@ public class MainScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime; // Увеличиваем таймер
-
         if (timer >= 1f) // Если прошла 1 секунда
         {
+            if ((gameData.PPS > 0) & (scr))
+                for (int i = 1; i <= gameData.PPS; i++)
+                {
+                    System.Random rnd = new System.Random();
+                    int x_cor = rnd.Next(-150, 150);
+                    instance = Instantiate(total_fall,
+                    new Vector3(x_cor, total_fall.transform.position.y, 0), Quaternion.identity, canvas.transform);
+                    StartCoroutine(CheckAnimationEnd(instance));
+                }
             timer = 0f; // Сбрасываем таймер
             gameData.score += 1 * gameData.PPS;
             score_tmp.text = "<sprite=0> " + gameData.score.ToString();
@@ -58,6 +70,26 @@ public class MainScript : MonoBehaviour
             activity.Call<bool>("moveTaskToBack", true);
         }
 
+    }
+    private IEnumerator CheckAnimationEnd(GameObject instance)
+    {
+        Animator animator = instance.GetComponent<Animator>();
+        if (animator != null)
+        {
+            // Ждем, пока анимация завершится
+            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+            {
+                yield return null; // Ждем один кадр
+            }
+
+            // Удаляем объект после завершения анимации
+            Destroy(instance);
+        }
+        else
+        {
+            Debug.LogError("У объекта нет компонента Animator.");
+            Destroy(instance); // Удаляем объект, если Animator отсутствует
+        }
     }
 
     private void OnValidate()
@@ -104,18 +136,22 @@ public class MainScript : MonoBehaviour
         ShopCanvas.SetActive(false);
         switch (screen) {
             case Screen.Tasks:
+                scr = false;
                 TasksButton.gameObject.SetActive(false);
                 TasksCanvas.SetActive(true);
                 break;
             case Screen.Grind:
+                scr = true;
                 GrindButton.gameObject.SetActive(false);
                 GrindCanvas.SetActive(true);
                 break;
             case Screen.Map:
+                scr = false;
                 MapButton.gameObject.SetActive(false);
                 MapCanvas.SetActive(true);
                 break;
             case Screen.Shop:
+                scr = false;
                 ShopButton.gameObject.SetActive(false);
                 ShopCanvas.SetActive(true);
                 break;

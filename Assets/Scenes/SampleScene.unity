@@ -882,15 +882,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
+  total_fall: {fileID: 1277317882949338956, guid: 88e764b0eb77f26448d99d74ac4dde28, type: 3}
   TasksCanvas: {fileID: 1376810945}
   GrindCanvas: {fileID: 168836487}
   MapCanvas: {fileID: 1575467406}
   ShopCanvas: {fileID: 801732710}
+  instance: {fileID: 0}
   TasksButton: {fileID: 719874416}
   GrindButton: {fileID: 628553544}
   MapButton: {fileID: 967109347}
   ShopButton: {fileID: 1081267159}
+  canvas: {fileID: 2055039691}
   score_tmp: {fileID: 170874368}
+  scr: 1
 --- !u!1001 &574314929
 PrefabInstance:
   m_ObjectHideFlags: 0
