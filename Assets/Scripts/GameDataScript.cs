@@ -21,9 +21,3 @@ public enum Screen
     Map,
     Shop
 }
-
-public class PancakeStack
-{
-    public int height;
-    public GameObject stack;
-}
