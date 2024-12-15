@@ -26,7 +26,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     void Start()
     {
         tmp = Camera.main.GetComponent<MainScript>().score_tmp;
-        tmp.text = "<sprite=0> " + gameData.score.ToString();
+        tmp.text = gameData.score.ToString() + " <sprite=0>";
         Fall = Resources.Load<GameObject>("Prefabs/Fall");
         Stack = Resources.Load<GameObject>("Prefabs/Stack");
         StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
@@ -61,7 +61,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData data)
     {
         gameData.score += 1 + gameData.mod;
-        tmp.text = "<sprite=0> " + gameData.score.ToString();
+        tmp.text = gameData.score.ToString() + " <sprite=0>";
         gameData.Klick++;
         Instantiate(Fall, new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0), Quaternion.identity, StackObject.transform);
         speed += 4f;

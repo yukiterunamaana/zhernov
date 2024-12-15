@@ -36,7 +36,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     gameData.score -= cost;
                     gameData.mod += 1;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
+                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;
@@ -47,7 +47,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     gameData.score -= cost;
                     gameData.PPS++;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
+                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;
@@ -58,7 +58,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     gameData.score -= cost;
                     gameData.add_mod += 0.1;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = "<sprite=0> " + gameData.score.ToString();
+                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;

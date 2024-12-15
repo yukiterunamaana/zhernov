@@ -54,13 +54,13 @@ public class MainScript : MonoBehaviour
                 }
             timer = 0f; // —брасываем таймер
             gameData.score += 1 * gameData.PPS;
-            score_tmp.text = "<sprite=0> " + gameData.score.ToString();
+            score_tmp.text = gameData.score.ToString() + " <sprite=0>";
         }
         if (gameData.Klick == 100)
         {
             gameData.score += (int)(gameData.add_mod * (float)gameData.score);
             gameData.Klick = 0;
-            score_tmp.text = "<sprite=0> " + gameData.score.ToString();
+            score_tmp.text = gameData.score.ToString() + " <sprite=0>";
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
