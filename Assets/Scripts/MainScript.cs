@@ -31,6 +31,7 @@ public class MainScript : MonoBehaviour
         gameData.Klick = 0;
         gameData.add_mod = 0;
         gameData.currentScreen = Screen.Grind;
+        gameData.stackSize = 0;
 }
 
     // Update is called once per frame

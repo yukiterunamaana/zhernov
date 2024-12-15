@@ -12,12 +12,18 @@ public class GameDataScript : ScriptableObject
     public int Klick = 0;
     public double add_mod = 0;
     public Screen currentScreen = Screen.Grind;
+    public int stackSize = 0;
 }
-
 public enum Screen
 {
     Tasks,
     Grind,
     Map,
     Shop
+}
+
+public class PancakeStack
+{
+    public int height;
+    public GameObject stack;
 }
