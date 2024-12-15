@@ -894,7 +894,6 @@ MonoBehaviour:
   ShopButton: {fileID: 1081267159}
   canvas: {fileID: 2055039691}
   score_tmp: {fileID: 170874368}
-  scr: 1
 --- !u!1001 &574314929
 PrefabInstance:
   m_ObjectHideFlags: 0
