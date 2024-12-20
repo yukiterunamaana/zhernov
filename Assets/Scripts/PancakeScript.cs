@@ -10,16 +10,16 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     public GameDataScript gameData;
     GameObject Fall;
     GameObject Stack;
+    GameObject OldStack;
     GameObject StackObject;
-    List<GameObject> OldStacks = new List<GameObject>();
     Transform Plate;
     public Canvas Canvas;
     TMP_Text tmp;
     public Image Tablecloth;
     float speed = 0f;
+    float maxspeed = 300f;
     private float timer = 0f;
     float lastClick = 1f;
-    int stackHeight = 0;
     private int limitedHeight = 15;
     //public GameDataScript Mod;
     // Start is called before the first frame update
@@ -32,7 +32,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
             Quaternion.identity, Canvas.transform);
         Plate = StackObject.transform.GetChild(0);
-        stackHeight = gameData.stackSize;
     }
     // Update is called once per frame
     void Update()
@@ -42,55 +41,60 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         if (timer >= 0.25f)
         {
             timer = 0f;
-            speed -= 0.5f * lastClick * lastClick;
+            speed -= 7f * lastClick * lastClick * lastClick;
             if (speed < 0)
                 speed = 0;
         }
         transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
-        if (stackHeight >= limitedHeight)
-        {
-            foreach (GameObject OldStack in OldStacks)
-            {
-                OldStack.GetComponent<Animator>().SetBool("Move", true);
-                StartCoroutine(WaitAndDelete(OldStack));
-            }
-            Tablecloth.GetComponent<Animator>().SetBool("Started", true);
-            stackHeight = 0;
-        }
     }
     public void OnPointerDown(PointerEventData data)
     {
         gameData.score += 1 + gameData.mod;
         tmp.text = gameData.score.ToString() + " <sprite=0>";
         gameData.Klick++;
-        Instantiate(Fall, new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0), Quaternion.identity, StackObject.transform);
-        speed += 4f;
+        if (gameData.Klick == 100)
+        {
+            gameData.score += (int)(gameData.add_mod * (float)gameData.score);
+            gameData.Klick = 0;
+            tmp.text = gameData.score.ToString() + " <sprite=0>";
+        }
+        GameObject FallObject=Instantiate(Fall, 
+            new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0), 
+            Quaternion.identity, StackObject.transform);
+        float fallSpeed = 1.5f*limitedHeight / (1.5f*limitedHeight - gameData.stackSize);
+        FallObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
+        FallObject.transform.GetChild(1).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
+        speed += 10f;
         lastClick = 1f;
-        if (speed > 90)
-            speed = 90;
+        if (speed > maxspeed)
+            speed = maxspeed;
         gameData.stackSize++;
         if (gameData.stackSize == limitedHeight)
         {
-            OldStacks.Add(StackObject);
+            OldStack = StackObject;
             StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
              Quaternion.identity, Canvas.transform);
             StackObject.transform.SetAsFirstSibling();
             gameData.stackSize = 0;
             Plate = StackObject.transform.GetChild(0);
         }
-        StartCoroutine(WaitAndCount());
+        StartCoroutine(WaitAndCount(OldStack, fallSpeed, gameData.stackSize));
     }
-    public IEnumerator WaitAndCount()
+    public IEnumerator WaitAndCount(GameObject obj, float fallSpeed, int stackHeight)
     {
-        yield return new WaitForSeconds(1);
-        stackHeight++;
+        yield return new WaitForSeconds(1/ fallSpeed);
+        if (stackHeight == 0)
+        {
+            obj.GetComponent<Animator>().SetBool("Move", true);
+            StartCoroutine(WaitAndDelete(obj));
+            Tablecloth.GetComponent<Animator>().SetBool("Started", true);
+        }
     }
 
     public IEnumerator WaitAndDelete(GameObject obj)
     {
-        yield return new WaitForSeconds(1);
-        OldStacks.Remove(obj);
-        if (OldStacks.Count == 0)
+        yield return new WaitForSeconds(1);     
+        if (OldStack == obj)
         {
             Tablecloth.GetComponent<Animator>().SetBool("Started", false);
         }
@@ -99,11 +103,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
 
     public void OnDisable()
     {
-        foreach (GameObject OldStack in OldStacks)
-        {
-            Destroy(OldStack);
-        }
+        Destroy(OldStack);
         Tablecloth.GetComponent<Animator>().SetBool("Started", false);
-        OldStacks.Clear();
     }
 }
