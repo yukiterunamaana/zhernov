@@ -31,34 +31,31 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
         switch (name_button)
         {
             case  "hand":
-                if (gameData.score >= cost)
+                if (gameData.Score >= cost)
                 {
-                    gameData.score -= cost;
+                    gameData.Score -= cost;
                     gameData.mod += 1;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;
 
             case  "lizard":
-                if (gameData.score >= cost)
+                if (gameData.Score >= cost)
                 {
-                    gameData.score -= cost;
+                    gameData.Score -= cost;
                     gameData.PPS++;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;
 
             case "bank":
-                if (gameData.score >= cost)
+                if (gameData.Score >= cost)
                 {
-                    gameData.score -= cost;
+                    gameData.Score -= cost;
                     gameData.add_mod += 0.1;
                     cost = (int)(cost * 1.35);
-                    score_tmp.text = gameData.score.ToString() + " <sprite=0>";
                     text.text = cost.ToString();
                 }
                 break;

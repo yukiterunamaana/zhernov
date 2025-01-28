@@ -40,7 +40,6 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     }
     public void OnEndDrag(PointerEventData eventData) {
         millBuilding.color = new Color(0, 0, 0, 1f);
-        gameData.score -= 75;
-        score_tmp.text = gameData.score.ToString() + " <sprite=0>";
+        gameData.Score -= 75;
     }
 }

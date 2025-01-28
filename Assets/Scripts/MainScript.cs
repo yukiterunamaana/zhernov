@@ -28,7 +28,8 @@ public class MainScript : MonoBehaviour
     void Start()
     {
         LoadScrene(gameData.currentScreen);
-        gameData.score = 300;
+        gameData.score_tmp = score_tmp;
+        gameData.Score = 300;
         gameData.mod = 0;
         gameData.PPS = 0;
         gameData.Klick = 0;
@@ -53,8 +54,7 @@ public class MainScript : MonoBehaviour
                     StartCoroutine(CheckAnimationEnd(instance));
                 }
             timer = 0f; // —брасываем таймер
-            gameData.score += 1 * gameData.PPS;
-            score_tmp.text = gameData.score.ToString() + " <sprite=0>";
+            gameData.Score += 1 * gameData.PPS;
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))

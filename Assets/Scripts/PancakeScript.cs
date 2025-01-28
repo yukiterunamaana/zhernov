@@ -14,7 +14,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     GameObject StackObject;
     Transform Plate;
     public Canvas Canvas;
-    TMP_Text tmp;
     public Image Tablecloth;
     float speed = 0f;
     float maxspeed = 300f;
@@ -25,8 +24,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
-        tmp = Camera.main.GetComponent<MainScript>().score_tmp;
-        tmp.text = gameData.score.ToString() + " <sprite=0>";
         Fall = Resources.Load<GameObject>("Prefabs/Fall");
         Stack = Resources.Load<GameObject>("Prefabs/Stack");
         StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
@@ -49,14 +46,12 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        gameData.score += 1 + gameData.mod;
-        tmp.text = gameData.score.ToString() + " <sprite=0>";
+        gameData.Score += 1 + gameData.mod;
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
-            gameData.score += (int)(gameData.add_mod * (float)gameData.score);
+            gameData.Score += (int)(gameData.add_mod * (float)gameData.Score);
             gameData.Klick = 0;
-            tmp.text = gameData.score.ToString() + " <sprite=0>";
         }
         GameObject FallObject=Instantiate(Fall, 
             new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0), 
