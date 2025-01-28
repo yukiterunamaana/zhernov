@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameData", menuName = "Game Data", order = 51)]
@@ -20,4 +21,16 @@ public enum Screen
     Grind,
     Map,
     Shop
+}
+
+public class MapTile
+{
+    public int x { get; set; }
+    public int y { get; set; }
+    public TileType type { get; set; }
+}
+
+public enum TileType
+{
+    Grass
 }

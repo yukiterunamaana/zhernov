@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MapScript : MonoBehaviour
+{
+    public Canvas canvas;
+    void Start()
+    {
+        int width = 40;
+        int height = 20;
+        Image Tile = Resources.Load<Image>("Prefabs/Tile");
+        Sprite mill = Resources.Load<Sprite>("Sprites/mill");
+        for (int i = -width/2; i<width/2; i++)
+        {
+            for (int j = -height/2; j<height/2; j++)
+            {
+                Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+            }
+        }
+        Image millBuilding = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+        millBuilding.sprite = mill;
+        millBuilding.rectTransform.sizeDelta = new Vector2(2,2);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+}
