@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6957113bea945c141ae3be461d600d58, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  score: 48
+  score: 150
   mod: 0
-  PPS: 3
+  PPS: 0
   Klick: 0
   add_mod: 0
-  currentScreen: 1
+  currentScreen: 2
   stackSize: 0

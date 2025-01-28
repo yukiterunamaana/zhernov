@@ -28,12 +28,12 @@ public class MainScript : MonoBehaviour
     void Start()
     {
         LoadScrene(gameData.currentScreen);
-        gameData.score = 0;
+        gameData.score = 300;
         gameData.mod = 0;
         gameData.PPS = 0;
         gameData.Klick = 0;
         gameData.add_mod = 0;
-        gameData.currentScreen = Screen.Grind;
+        gameData.currentScreen = Screen.Map;
         gameData.stackSize = 0;
 }
 
