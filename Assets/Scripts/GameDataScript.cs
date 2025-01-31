@@ -10,8 +10,8 @@ public class GameDataScript : ScriptableObject
     // Start is called before the first frame update
     public TMP_Text score_tmp;
     private int score;
-    public int width = 40;
-    public int height = 20;
+    public Level state;
+    public string saveFile;
     public int Score {
         get
         {
@@ -30,6 +30,11 @@ public class GameDataScript : ScriptableObject
     public double add_mod = 0;
     public Screen currentScreen = Screen.Grind;
     public int stackSize = 0;
+
+    public void OnEnable()
+    {
+        saveFile = Application.persistentDataPath + "/gamedata.json";
+    }
 }
 public enum Screen
 {
@@ -49,4 +54,30 @@ public class MapTile
 public enum TileType
 {
     Grass
+}
+
+[System.Serializable]
+public class Level
+{
+    public int width;
+    public int height;
+    public List<Building> buildings;
+    public static Level CreateFromJSON(string jsonString)
+    {
+        return JsonUtility.FromJson<Level>(jsonString);
+    }
+}
+[System.Serializable]
+public class Building
+{
+    public int x;
+    public int y;
+    public string type;
+
+    public Building (int x, int y, string type)
+    {
+        this.x = x;
+        this.y = y;
+        this.type = type;
+    }
 }

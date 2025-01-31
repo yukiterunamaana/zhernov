@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.IO;
 using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -13,6 +14,8 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     Image millBuilding;
     public Canvas canvas;
     public GameDataScript gameData;
+    int x;
+    int y;
     void Start()
     {
     }
@@ -41,9 +44,9 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         millBuilding.color = new Color(0, 0, 0, 0.5f);
     }
     public void OnDrag(PointerEventData eventData) {
-        float x = eventData.pointerCurrentRaycast.worldPosition.x;
-        float y = eventData.pointerCurrentRaycast.worldPosition.y;
-        millBuilding.transform.position = new Vector3(Mathf.Floor(x), Mathf.Floor(y), 0);
+        x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
+        y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
+        millBuilding.transform.position = new Vector3(x, y, 0);
     }
     public void OnEndDrag(PointerEventData eventData) {
         millBuilding.color = new Color(0, 0, 0, 1f);
@@ -51,6 +54,9 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         {
             millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
             gameData.Score -= 75;
+            gameData.state.buildings.Add(new Building(x, y, "mill"));
+            string save = JsonUtility.ToJson(gameData.state);
+            File.WriteAllText(gameData.saveFile, save);
         }
         else
         {
