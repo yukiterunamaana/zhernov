@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class MapScript : MonoBehaviour
 {
     public Canvas canvas;
+    public GameDataScript data;
     void Start()
     {
-        int width = 40;
-        int height = 20;
+        int width = data.width;
+        int height = data.height;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
         for (int i = -width/2; i<width/2; i++)
@@ -19,7 +20,9 @@ public class MapScript : MonoBehaviour
                 Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
             }
         }
-        Image millBuilding = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+        Image Building = Resources.Load<Image>("Prefabs/Building");
+        Image millBuilding = Instantiate(Building, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+        millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
         millBuilding.sprite = mill;
         millBuilding.rectTransform.sizeDelta = new Vector2(2,2);
     }

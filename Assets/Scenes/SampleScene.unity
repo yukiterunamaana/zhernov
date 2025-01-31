@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &168836488
 Transform:
   m_ObjectHideFlags: 0
@@ -1288,6 +1288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702da0ce5695c104593fa7acb1cc5154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!1 &891487657
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AnchorMin.x
@@ -1597,15 +1598,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 199.99997
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 199.99997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1637,11 +1638,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150
+      value: 311.25
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -133.3125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2036,7 +2037,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1575467407
 Transform:
   m_ObjectHideFlags: 0
@@ -2066,6 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1236828449}
+  data: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!1 &1589025636
 GameObject:
   m_ObjectHideFlags: 0

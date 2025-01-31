@@ -10,6 +10,8 @@ public class GameDataScript : ScriptableObject
     // Start is called before the first frame update
     public TMP_Text score_tmp;
     private int score;
+    public int width = 40;
+    public int height = 20;
     public int Score {
         get
         {
