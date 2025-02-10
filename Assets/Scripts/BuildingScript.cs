@@ -23,10 +23,6 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     // Update is called once per frame
     void Update()
     {
-        if (gameData.Score <= 75)
-        {
-            
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -56,7 +52,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             gameData.Score -= 75;
             gameData.state.buildings.Add(new Building(x, y, "mill"));
             string save = JsonUtility.ToJson(gameData.state);
-            File.WriteAllText(gameData.saveFile, save);
+            File.WriteAllText(Application.persistentDataPath + "/gamedata.json", save);
         }
         else
         {

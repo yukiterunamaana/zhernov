@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,27 +9,36 @@ public class MapScript : MonoBehaviour
 {
     public Canvas canvas;
     public GameDataScript data;
+    public bool isEditor = false;
     void Start()
     {
-        
         string LevelString;
-        if (File.Exists(data.saveFile))
+        string saveFile = Application.persistentDataPath + "/gamedata.json";
+        if (File.Exists(saveFile) && !isEditor)
         {
-            LevelString = File.ReadAllText(data.saveFile);
+            LevelString = File.ReadAllText(saveFile);
         }
         else
         {
             LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
         }
-        data.state = Level.CreateFromJSON(LevelString);
+        LoadLevel(JsonUtility.FromJson<Level>(LevelString));
+    }
+
+    public void LoadLevel(Level level)
+    {
+        data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
-        for (int i = -data.state.width / 2; i < data.state.width / 2; i++)
+        Landscape[] landscapes = JsonUtility.FromJson<LWrapper>(Resources.Load<TextAsset>("Landscapes").text).items;
+        Dictionary<string, Sprite> landSprites = new();
+        foreach (var l in landscapes) {
+            landSprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
+        }
+        foreach (var t in data.state.tiles)
         {
-            for (int j = -data.state.height / 2; j < data.state.height / 2; j++)
-            {
-                Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-            }
+            var Cell = Instantiate(Tile, new Vector3(t.x, t.y, 0), Quaternion.identity, canvas.transform);
+            Cell.sprite = landSprites[t.type];
         }
         Image Building = Resources.Load<Image>("Prefabs/Building");
         foreach (var b in data.state.buildings)
@@ -39,7 +49,11 @@ public class MapScript : MonoBehaviour
             millBuilding.rectTransform.sizeDelta = new Vector2(2, 2);
         }
     }
-
+    public void SaveLevel()
+    {
+        string save = JsonUtility.ToJson(data.state);
+        File.WriteAllText(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json", save);
+    }
     // Update is called once per frame
     void Update()
     {

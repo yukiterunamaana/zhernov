@@ -11,7 +11,6 @@ public class GameDataScript : ScriptableObject
     public TMP_Text score_tmp;
     private int score;
     public Level state;
-    public string saveFile;
     public int Score {
         get
         {
@@ -31,10 +30,6 @@ public class GameDataScript : ScriptableObject
     public Screen currentScreen = Screen.Grind;
     public int stackSize = 0;
 
-    public void OnEnable()
-    {
-        saveFile = Application.persistentDataPath + "/gamedata.json";
-    }
 }
 public enum Screen
 {
@@ -44,29 +39,43 @@ public enum Screen
     Shop
 }
 
-public class MapTile
-{
-    public int x { get; set; }
-    public int y { get; set; }
-    public TileType type { get; set; }
-}
-
-public enum TileType
-{
-    Grass
-}
-
 [System.Serializable]
 public class Level
 {
     public int width;
     public int height;
     public List<Building> buildings;
-    public static Level CreateFromJSON(string jsonString)
+    public List<Tile> tiles;
+    public Level(int width, int height)
     {
-        return JsonUtility.FromJson<Level>(jsonString);
+        this.width = width;
+        this.height = height;
+        tiles = new List<Tile>();
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                tiles.Add(new Tile(i - width/2, j - height/2));
+            }
+        }
+        buildings = new List<Building>() { new (0, 0, "mill") };
     }
 }
+[System.Serializable]
+
+public class Tile
+{
+    public string type;
+    public int x;
+    public int y;
+    public Tile(int x, int y)
+    {
+        this.x = x; 
+        this.y = y;
+        type = "grass";
+    }
+}
+
 [System.Serializable]
 public class Building
 {
@@ -80,4 +89,17 @@ public class Building
         this.y = y;
         this.type = type;
     }
+}
+
+[System.Serializable]
+public class Landscape
+{
+    public string type;
+    public string icon;
+}
+
+[System.Serializable]
+public class LWrapper
+{
+    public Landscape[] items;
 }

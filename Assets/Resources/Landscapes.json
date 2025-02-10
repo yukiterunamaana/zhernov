@@ -1,0 +1,12 @@
+{
+    "items": [
+        {
+            "type": "grass",
+            "icon": "grass"
+        },
+        {
+            "type": "water",
+            "icon": "water"
+        }
+    ]
+}
