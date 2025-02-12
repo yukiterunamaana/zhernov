@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.VersionControl;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,10 +35,21 @@ public class MapScript : MonoBehaviour
         foreach (var l in landscapes) {
             landSprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
         }
+        int index = 0;
         foreach (var t in data.state.tiles)
         {
             var Cell = Instantiate(Tile, new Vector3(t.x, t.y, 0), Quaternion.identity, canvas.transform);
             Cell.sprite = landSprites[t.type];
+            Cell.tag = t.type;
+            Cell.GetComponent<TileScript>().x = t.x;
+            Cell.GetComponent<TileScript>().y = t.y;
+            Cell.GetComponent<TileScript>().index = index;
+            if (isEditor)
+            {
+                var scr = Cell.AddComponent<EditorTileScript>();
+                scr.GameData = data;
+            }
+            index++;
         }
         Image Building = Resources.Load<Image>("Prefabs/Building");
         foreach (var b in data.state.buildings)

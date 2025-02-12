@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ public class MapEditorScript : MonoBehaviour
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);
             I.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.icon);
+            I.GetComponent<LandscapeButtonScript>().type = l.type;
         }
     }
 

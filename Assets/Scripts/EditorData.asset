@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 40
   height: 40
+  brush: none

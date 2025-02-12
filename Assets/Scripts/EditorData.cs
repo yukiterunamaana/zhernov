@@ -8,4 +8,5 @@ public class EditorData : ScriptableObject
     // Start is called before the first frame update
     public int width = 20;
     public int height = 20;
+    public string brush = "none";
 }

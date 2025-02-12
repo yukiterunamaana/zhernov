@@ -21,19 +21,26 @@ public class BuildingObjectScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        CollidingCount++;
-        if (!IsBuilt)
+        if (other.CompareTag("building") ||other.CompareTag("water"))
         {
-            GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
+            CollidingCount++;
+            if (!IsBuilt)
+            {
+                GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
+            }
         }
+
     }
 
     void OnTriggerExit2D(Collider2D other) 
     {
-        CollidingCount--;
-        if (!IsBuilt && CollidingCount==0)
+        if (other.CompareTag("building") || other.CompareTag("water"))
         {
-            GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
+            CollidingCount--;
+            if (!IsBuilt && CollidingCount == 0)
+            {
+                GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
+            }
         }
     }
 }

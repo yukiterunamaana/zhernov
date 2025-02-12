@@ -29,6 +29,7 @@ public class GameDataScript : ScriptableObject
     public double add_mod = 0;
     public Screen currentScreen = Screen.Grind;
     public int stackSize = 0;
+    public EditorData editorData;
 
 }
 public enum Screen
