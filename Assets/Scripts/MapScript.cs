@@ -57,7 +57,7 @@ public class MapScript : MonoBehaviour
             Image millBuilding = Instantiate(Building, new Vector3(b.x, b.y, 0), Quaternion.identity, canvas.transform);
             millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
             millBuilding.sprite = mill;
-            millBuilding.rectTransform.sizeDelta = new Vector2(2, 2);
+            millBuilding.rectTransform.sizeDelta = new Vector2(1, 1);
         }
     }
     public void SaveLevel()
