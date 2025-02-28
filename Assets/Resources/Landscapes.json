@@ -7,10 +7,6 @@
         {
             "type": "water",
             "icon": "water"
-        },
-        {
-            "type": "tree",
-            "icon": "tree"
         }
     ]
 }

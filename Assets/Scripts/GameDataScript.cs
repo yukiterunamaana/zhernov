@@ -46,6 +46,7 @@ public class Level
     public int width;
     public int height;
     public List<Building> buildings;
+    public List<ObjectTile> objs;
     public List<Tile> tiles;
     public Level(int width, int height)
     {
@@ -60,6 +61,7 @@ public class Level
             }
         }
         buildings = new List<Building>() { new (0, 0, "mill") };
+        objs = new List<ObjectTile>();
     }
 }
 [System.Serializable]
@@ -91,7 +93,21 @@ public class Building
         this.type = type;
     }
 }
-
+[System.Serializable]
+public class ObjectTile
+{
+    public int x;
+    public int y;
+    public string tag;
+    public string icon;
+    public ObjectTile(int x, int y, string tag, string icon)
+    {
+        this.x = x;
+        this.y = y;
+        this.tag = tag;
+        this.icon = icon;
+    }
+}
 [System.Serializable]
 public class Landscape
 {
@@ -103,4 +119,17 @@ public class Landscape
 public class LWrapper
 {
     public Landscape[] items;
+}
+
+[System.Serializable]
+public class MapObject
+{
+    public string tag;
+    public string icon;
+}
+
+[System.Serializable]
+public class MWrapper
+{
+    public MapObject[] items;
 }

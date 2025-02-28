@@ -7,6 +7,7 @@ public class LandscapeButtonScript : MonoBehaviour, IPointerDownHandler
 {
     public EditorData EditorData;
     public string type;
+    public string brushType;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class LandscapeButtonScript : MonoBehaviour, IPointerDownHandler
         else
         {
             EditorData.brush = type;
+            EditorData.brushType = brushType;
         }
     }
 }

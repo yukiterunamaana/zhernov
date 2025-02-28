@@ -36,8 +36,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
         millBuilding = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
         millBuilding.sprite = mill;
-        millBuilding.rectTransform.sizeDelta = new Vector2(2, 2);
-        millBuilding.color = new Color(0, 0, 0, 0.5f);
+        millBuilding.color = new Color(1, 1, 1, 0.5f);
     }
     public void OnDrag(PointerEventData eventData) {
         x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
@@ -45,7 +44,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         millBuilding.transform.position = new Vector3(x, y, 0);
     }
     public void OnEndDrag(PointerEventData eventData) {
-        millBuilding.color = new Color(0, 0, 0, 1f);
+        millBuilding.color = new Color(1, 1, 1, 1f);
         if (millBuilding.GetComponent<BuildingObjectScript>().CollidingCount==0)
         {
             millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;

@@ -21,7 +21,7 @@ public class BuildingObjectScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("building") ||other.CompareTag("water"))
+        if (other.CompareTag("building") ||other.CompareTag("water") || other.CompareTag("tree"))
         {
             CollidingCount++;
             if (!IsBuilt)
@@ -34,7 +34,7 @@ public class BuildingObjectScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other) 
     {
-        if (other.CompareTag("building") || other.CompareTag("water"))
+        if (other.CompareTag("building") || other.CompareTag("water") || other.CompareTag("tree"))
         {
             CollidingCount--;
             if (!IsBuilt && CollidingCount == 0)

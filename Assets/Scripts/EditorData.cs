@@ -9,4 +9,5 @@ public class EditorData : ScriptableObject
     public int width = 20;
     public int height = 20;
     public string brush = "none";
+    public string brushType = "landscape";
 }

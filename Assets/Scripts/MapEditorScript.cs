@@ -15,12 +15,22 @@ public class MapEditorScript : MonoBehaviour
         map = GetComponent<MapScript>();
         Landscape[] landscapes = LoadAsset<LWrapper>("Landscapes").items;
         Image LandscapeButton = Resources.Load<Image>("Prefabs/EditorLandscape");
+        MapObject[] objs = LoadAsset<MWrapper>("Objects").items;
         foreach (var l in landscapes)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);
             I.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.icon);
             I.GetComponent<LandscapeButtonScript>().type = l.type;
+            I.GetComponent<LandscapeButtonScript>().brushType = "landscape";
+        }
+        foreach (var l in objs)
+        {
+            Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
+            Quaternion.identity, shop.transform);
+            I.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.icon);
+            I.GetComponent<LandscapeButtonScript>().type = l.icon;
+            I.GetComponent<LandscapeButtonScript>().brushType = "object";
         }
     }
 
