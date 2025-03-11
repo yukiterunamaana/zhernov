@@ -14,7 +14,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     GameObject StackObject;
     Transform Plate;
     public Canvas Canvas;
-    public Image Tablecloth;
+    public RawImage Tablecloth;
     float speed = 0f;
     float maxspeed = 300f;
     private float timer = 0f;
@@ -82,7 +82,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         {
             obj.GetComponent<Animator>().SetBool("Move", true);
             StartCoroutine(WaitAndDelete(obj));
-            Tablecloth.GetComponent<Animator>().SetBool("Started", true);
+            Tablecloth.GetComponent<TableclothScript>().started = true;
         }
     }
 
@@ -91,7 +91,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         yield return new WaitForSeconds(1);     
         if (OldStack == obj)
         {
-            Tablecloth.GetComponent<Animator>().SetBool("Started", false);
+            Tablecloth.GetComponent<TableclothScript>().started = false;
         }
         Destroy(obj);
     }
@@ -99,6 +99,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     public void OnDisable()
     {
         Destroy(OldStack);
-        Tablecloth.GetComponent<Animator>().SetBool("Started", false);
+        Tablecloth.GetComponent<TableclothScript>().started = false;
     }
 }
