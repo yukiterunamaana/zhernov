@@ -16,6 +16,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
+        gameData = MainScript.gameData;
         cost = (int)(100 * Mathf.Pow(1.35f, gameData.mod));
         text.text = cost.ToString();
         score_tmp = Camera.main.GetComponent<MainScript>().score_tmp;

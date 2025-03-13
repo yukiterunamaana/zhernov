@@ -6,12 +6,11 @@ using TMPro;
 using Newtonsoft.Json;
 using System.IO;
 
-[CreateAssetMenu(fileName = "GameData", menuName = "Game Data", order = 51)]
-public class GameDataScript : ScriptableObject
+public class GameDataScript
 {
     // Start is called before the first frame update
-    public TMP_Text score_tmp;
-    private int score;
+    public static TMP_Text score_tmp;
+    private int score = 300;
     public Level state;
     public int Score {
         get
@@ -21,7 +20,10 @@ public class GameDataScript : ScriptableObject
         set
         {
             score = value;
-            score_tmp.text = score.ToString() + " <sprite=0>";
+            if (score_tmp != null)
+            {
+                score_tmp.text = score.ToString() + " <sprite=0>";
+            }
 
         }
     }
@@ -31,6 +33,7 @@ public class GameDataScript : ScriptableObject
     public double add_mod = 0;
     public Screen currentScreen = Screen.Grind;
     public int stackSize = 0;
+    [JsonIgnore]
     public EditorData editorData;
     public int cur_klick = 0;
     public static void ToJson(string path, object state)
@@ -43,7 +46,6 @@ public class GameDataScript : ScriptableObject
             serializer.Serialize(writer, state);
         }
     }
-
 }
 public enum Screen
 {

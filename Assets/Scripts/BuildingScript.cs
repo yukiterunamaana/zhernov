@@ -19,6 +19,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     int y;
     void Start()
     {
+        gameData = MainScript.gameData;
     }
 
     // Update is called once per frame
@@ -60,6 +61,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         {
             gameData.Score -= 75;
             gameData.state.tiles[x,y].building = new Building("mill");
+            GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
         }
         else
         {

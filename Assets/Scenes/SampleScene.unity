@@ -563,7 +563,6 @@ RectTransform:
   m_Children:
   - {fileID: 1676416372}
   - {fileID: 1524278078}
-  - {fileID: 706974210}
   - {fileID: 1725927670}
   m_Father: {fileID: 801732711}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -756,6 +755,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3000757878153358846, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AspectMode
       value: 1
@@ -916,7 +919,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b5911217497b342a0b89f265ca29c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
   total_fall: {fileID: 1277317882949338956, guid: 88e764b0eb77f26448d99d74ac4dde28, type: 3}
   TasksCanvas: {fileID: 1376810945}
   GrindCanvas: {fileID: 168836487}
@@ -929,13 +931,14 @@ MonoBehaviour:
   ShopButton: {fileID: 1081267159}
   canvas: {fileID: 2055039691}
   score_tmp: {fileID: 170874368}
+  editorData: {fileID: 11400000, guid: 2f1dc6585181fe44197e1b235f3f54fe, type: 2}
 --- !u!1001 &574314929
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 221364439}
+    m_TransformParent: {fileID: 1524278078}
     m_Modifications:
     - target: {fileID: 22076755790314680, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
       propertyPath: m_Pivot.x
@@ -999,11 +1002,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22076755790314680, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 668
+      value: 426.5791
       objectReference: {fileID: 0}
     - target: {fileID: 22076755790314680, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -419
+      value: -253.49513
       objectReference: {fileID: 0}
     - target: {fileID: 22076755790314680, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1201,6 +1204,22 @@ PrefabInstance:
     - target: {fileID: 697189894790262983, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MenuButtonScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3000757878153358846, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AspectMode
@@ -1410,7 +1429,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 22076755790314680, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 706974210}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda65e66b2456a44193cf3ce87b115b8, type: 3}
 --- !u!114 &628553544 stripped
@@ -1492,7 +1514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1236828449}
-  gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!114 &679054681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,6 +2006,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2556180100289303217, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3000757878153358846, guid: f20580c66dbc64044bd3bb172580abcb, type: 3}
       propertyPath: m_AspectMode
       value: 1
@@ -2236,7 +2261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702da0ce5695c104593fa7acb1cc5154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!1 &1376810945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,7 +2344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1236828449}
-  data: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
   isEditor: 0
 --- !u!1 &1589025636
 GameObject:
@@ -2474,7 +2497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82b3696c98a76b4cba3b5dab5be5e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
   Canvas: {fileID: 947215719}
   Tablecloth: {fileID: 1675225502}
 --- !u!114 &1636774593
@@ -2736,7 +2758,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1236828449}
-  gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!114 &1807695114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2934,7 +2955,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1236828449}
-  gameData: {fileID: 11400000, guid: 14ce63bc802e23d48a7c5c8dfd385a05, type: 2}
 --- !u!1 &1920285744
 GameObject:
   m_ObjectHideFlags: 0

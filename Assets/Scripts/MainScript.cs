@@ -11,7 +11,7 @@ using System.IO;
 
 public class MainScript : MonoBehaviour
 {
-    public GameDataScript gameData;
+    public static GameDataScript gameData;
     public GameObject total_fall;
     public GameObject TasksCanvas;
     public GameObject GrindCanvas;
@@ -25,19 +25,26 @@ public class MainScript : MonoBehaviour
     public Canvas canvas;
     private float timer = 0f;
     public TMP_Text score_tmp;
+    public EditorData editorData;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        GameDataScript.score_tmp = score_tmp;
+        try
+        {
+            gameData = JsonConvert.DeserializeObject<GameDataScript>(File.ReadAllText(Application.persistentDataPath + "/gamedata.json"));
+            MapScript.CheckMap(gameData.state);
+        }
+        catch
+        {
+            gameData = new GameDataScript();
+            gameData.state = JsonConvert.DeserializeObject<Level>(Resources.Load<TextAsset>("DefaultLevel").text);
+        }
+    }
     void Start()
     {
         LoadScrene(gameData.currentScreen);
-        gameData.score_tmp = score_tmp;
-        gameData.Score = 300;
-        gameData.mod = 0;
-        gameData.PPS = 0;
-        gameData.Klick = 0;
-        gameData.add_mod = 0;
-        gameData.currentScreen = Screen.Map;
-        gameData.stackSize = 0;
 }
 
     // Update is called once per frame
@@ -88,37 +95,6 @@ public class MainScript : MonoBehaviour
         }
     }
 
-    private void OnValidate()
-    {
-        if (TasksCanvas.activeSelf)
-        {
-            TasksButton.gameObject.SetActive(false);
-            GrindButton.gameObject.SetActive(true);
-            MapButton.gameObject.SetActive(true);
-            ShopButton.gameObject.SetActive(true);
-        }
-        else if (GrindCanvas.activeSelf)
-        {
-            TasksButton.gameObject.SetActive(true);
-            GrindButton.gameObject.SetActive(false);
-            MapButton.gameObject.SetActive(true);
-            ShopButton.gameObject.SetActive(true);
-        }
-        else if (MapCanvas.activeSelf)
-        {
-            TasksButton.gameObject.SetActive(true);
-            GrindButton.gameObject.SetActive(true);
-            MapButton.gameObject.SetActive(false);
-            ShopButton.gameObject.SetActive(true);
-        }
-        else if (ShopCanvas.activeSelf)
-        {
-            TasksButton.gameObject.SetActive(true);
-            GrindButton.gameObject.SetActive(true);
-            MapButton.gameObject.SetActive(true);
-            ShopButton.gameObject.SetActive(false);
-        }
-    }
 
     public void LoadScrene(Screen screen)
     {

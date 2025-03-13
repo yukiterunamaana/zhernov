@@ -11,7 +11,7 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
     public GameDataScript GameData;
     void Start()
     {
-        
+        GameData = MainScript.gameData;
     }
 
     // Update is called once per frame

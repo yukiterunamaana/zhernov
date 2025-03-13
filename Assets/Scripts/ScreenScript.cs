@@ -10,6 +10,7 @@ public class ScreenScript : MonoBehaviour, IDragHandler
     // Start is called before the first frame update
     void Start()
     {
+        data = MainScript.gameData;
         Camera.main.transform.position = new Vector3(data.state.width / 2, data.state.height / 2, -10);
     }
 

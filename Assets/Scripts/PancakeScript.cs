@@ -24,6 +24,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
+        gameData = MainScript.gameData;
         Fall = Resources.Load<GameObject>("Prefabs/Fall");
         Stack = Resources.Load<GameObject>("Prefabs/Stack");
         StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),

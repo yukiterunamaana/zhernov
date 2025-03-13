@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using System;
 
 
 public class MapScript : MonoBehaviour
@@ -14,25 +15,18 @@ public class MapScript : MonoBehaviour
     public bool isEditor = false;
     void Start()
     {
+        data = MainScript.gameData;
         string LevelString;
         string saveFile = Application.persistentDataPath + "/gamedata.json";
-        if (!isEditor)
+        if (isEditor)
         {
-            try
-            {
-                LevelString = File.ReadAllText(saveFile);
-            }
-            catch
-            {
-                LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
-
-            }
+            LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
+            LoadLevel(JsonConvert.DeserializeObject<Level>(LevelString));
         }
         else
         {
-            LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
+            LoadLevel(data.state);
         }
-        LoadLevel(JsonConvert.DeserializeObject<Level>(LevelString));
 
     }
 
@@ -87,5 +81,12 @@ public class MapScript : MonoBehaviour
     void Update()
     {
         
+    }
+    public static void CheckMap(Level state)
+    {
+        if (state.width==0 || state.height == 0)
+        {
+            throw new ArgumentException("Incorrect map");
+        }
     }
 }

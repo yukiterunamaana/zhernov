@@ -9,6 +9,7 @@ public class AnimationScript : MonoBehaviour
     public GameDataScript gameData;
     void Start()
     {
+        gameData = MainScript.gameData;
         SourceImage = GetComponent<Image>().sprite;
     }
     void OnDisable()
