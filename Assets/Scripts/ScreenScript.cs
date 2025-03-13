@@ -10,7 +10,7 @@ public class ScreenScript : MonoBehaviour, IDragHandler
     // Start is called before the first frame update
     void Start()
     {
-
+        Camera.main.transform.position = new Vector3(data.state.width / 2, data.state.height / 2, -10);
     }
 
     // Update is called once per frame
@@ -23,10 +23,12 @@ public class ScreenScript : MonoBehaviour, IDragHandler
     {
         float x = Camera.main.transform.position.x + eventData.delta.x / 100;
         float y = Camera.main.transform.position.y + eventData.delta.y / 100;
-        float rX = Mathf.Abs(x+0.5f) + Camera.main.orthographicSize * Camera.main.aspect;
-        float rY = Mathf.Abs(y+0.5f) + Camera.main.orthographicSize;
-        if (rX < data.state.width / 2 && 
-            rY < data.state.height / 2)
+        float rX = x + 0.5f + Camera.main.orthographicSize * Camera.main.aspect;
+        float rY = y + 0.5f + Camera.main.orthographicSize;
+        float lX = x + 0.5f - Camera.main.orthographicSize * Camera.main.aspect;
+        float lY = y + 0.5f - Camera.main.orthographicSize;
+        if (lX > 0 && rX < data.state.width && 
+            lY > 0 && rY < data.state.height)
         {
             Camera.main.transform.position = new Vector3(x, y, -10);
         }

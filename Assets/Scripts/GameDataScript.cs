@@ -45,65 +45,47 @@ public class Level
 {
     public int width;
     public int height;
-    public List<Building> buildings;
-    public List<ObjectTile> objs;
-    public List<Tile> tiles;
+    public Tile[,] tiles;
     public Level(int width, int height)
     {
         this.width = width;
         this.height = height;
-        tiles = new List<Tile>();
+        tiles = new Tile[width, height];
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                tiles.Add(new Tile(i - width/2, j - height/2));
+                tiles[i,j] = new Tile();
             }
         }
-        buildings = new List<Building>() { new (0, 0, "mill") };
-        objs = new List<ObjectTile>();
     }
 }
 [System.Serializable]
 
 public class Tile
 {
-    public string type;
-    public int x;
-    public int y;
-    public Tile(int x, int y)
-    {
-        this.x = x; 
-        this.y = y;
-        type = "grass";
-    }
+    public string type = "grass";
+    public Building building = null;
+    public ObjectTile obj = null;
 }
 
 [System.Serializable]
 public class Building
 {
-    public int x;
-    public int y;
     public string type;
 
-    public Building (int x, int y, string type)
+    public Building (string type)
     {
-        this.x = x;
-        this.y = y;
         this.type = type;
     }
 }
 [System.Serializable]
 public class ObjectTile
 {
-    public int x;
-    public int y;
     public string tag;
     public string icon;
-    public ObjectTile(int x, int y, string tag, string icon)
+    public ObjectTile(string tag, string icon)
     {
-        this.x = x;
-        this.y = y;
         this.tag = tag;
         this.icon = icon;
     }
@@ -116,20 +98,8 @@ public class Landscape
 }
 
 [System.Serializable]
-public class LWrapper
-{
-    public Landscape[] items;
-}
-
-[System.Serializable]
 public class MapObject
 {
     public string tag;
     public string icon;
-}
-
-[System.Serializable]
-public class MWrapper
-{
-    public MapObject[] items;
 }

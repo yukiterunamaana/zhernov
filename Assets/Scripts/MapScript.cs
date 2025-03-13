@@ -4,6 +4,8 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
+
 
 public class MapScript : MonoBehaviour
 {
@@ -22,7 +24,7 @@ public class MapScript : MonoBehaviour
         {
             LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
         }
-        LoadLevel(JsonUtility.FromJson<Level>(LevelString));
+        LoadLevel(JsonConvert.DeserializeObject<Level>(LevelString));
     }
 
     public void LoadLevel(Level level)
@@ -30,48 +32,53 @@ public class MapScript : MonoBehaviour
         data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
-        Landscape[] landscapes = JsonUtility.FromJson<LWrapper>(Resources.Load<TextAsset>("Landscapes").text).items;
+        Landscape[] landscapes = JsonConvert.DeserializeObject<Landscape[]>(Resources.Load<TextAsset>("Landscapes").text);
+        MapObject[] objs = JsonConvert.DeserializeObject<MapObject[]>(Resources.Load<TextAsset>("Objects").text);
         Dictionary<string, Sprite> landSprites = new();
         foreach (var l in landscapes) {
             landSprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
         }
-        int index = 0;
-        foreach (var t in data.state.tiles)
+        foreach (var l in objs)
         {
-            var Cell = Instantiate(Tile, new Vector3(t.x, t.y, 0), Quaternion.identity, canvas.transform);
-            Cell.sprite = landSprites[t.type];
-            Cell.tag = t.type;
-            Cell.GetComponent<TileScript>().x = t.x;
-            Cell.GetComponent<TileScript>().y = t.y;
-            Cell.GetComponent<TileScript>().index = index;
-            if (isEditor)
-            {
-                var scr = Cell.AddComponent<EditorTileScript>();
-                scr.GameData = data;
-            }
-            index++;
+            landSprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
         }
         Image Building = Resources.Load<Image>("Prefabs/Building");
-        foreach (var b in data.state.buildings)
+        for (int i=0; i<data.state.width; i++)
         {
-            Image millBuilding = Instantiate(Building, new Vector3(b.x, b.y, 0), Quaternion.identity, canvas.transform);
-            millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
-            millBuilding.sprite = mill;
-            millBuilding.rectTransform.sizeDelta = new Vector2(1, 1);
-        }
-        foreach (var b in data.state.objs)
-        {
-            Image millBuilding = Instantiate(Building, new Vector3(b.x, b.y, 0), Quaternion.identity, canvas.transform);
-            millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
-            millBuilding.sprite = Resources.Load<Sprite>("Sprites/" + b.icon);
-            millBuilding.tag = b.tag;
-            millBuilding.rectTransform.sizeDelta = new Vector2(1, 1);
+            for (int j=0; j<data.state.height; j++)
+            {
+                var t = data.state.tiles[i, j];
+                var Cell = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+                Cell.sprite = landSprites[t.type];
+                if (isEditor)
+                {
+                    var scr = Cell.AddComponent<EditorTileScript>();
+                    scr.GameData = data;
+                }
+                if (t.building is not null)
+                {
+                    Image millBuilding = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+                    millBuilding.sprite = mill;
+                }
+                if (t.obj is not null)
+                {
+                    Image MapObject = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+                    MapObject.sprite = landSprites[t.obj.icon];
+                }
+            }
         }
     }
     public void SaveLevel()
     {
-        string save = JsonUtility.ToJson(data.state);
-        File.WriteAllText(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json", save);
+        //string save = JsonUtility.ToJson(data.state);
+        JsonSerializer serializer = new JsonSerializer();
+        serializer.NullValueHandling = NullValueHandling.Ignore;
+        using (StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json"))
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            serializer.Serialize(writer, data.state);
+        }
+        //File.WriteAllText(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json", save);
     }
     // Update is called once per frame
     void Update()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 
 public class MapEditorScript : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class MapEditorScript : MonoBehaviour
     void Start()
     {
         map = GetComponent<MapScript>();
-        Landscape[] landscapes = LoadAsset<LWrapper>("Landscapes").items;
+        Landscape[] landscapes = LoadAsset<Landscape[]>("Landscapes");
         Image LandscapeButton = Resources.Load<Image>("Prefabs/EditorLandscape");
-        MapObject[] objs = LoadAsset<MWrapper>("Objects").items;
+        MapObject[] objs = LoadAsset<MapObject[]>("Objects");
         foreach (var l in landscapes)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
@@ -43,7 +44,7 @@ public class MapEditorScript : MonoBehaviour
     public T LoadAsset<T>(string path)
     {
         string asset = Resources.Load<TextAsset>(path).text;
-        return JsonUtility.FromJson<T>(asset);
+        return JsonConvert.DeserializeObject<T>(asset);
     }
 
     public void CreateLevel()
