@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Timers;
+using Newtonsoft.Json;
+using System.IO;
 
 public class MainScript : MonoBehaviour
 {
@@ -59,6 +61,13 @@ public class MainScript : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+            using (StreamWriter sw = new StreamWriter(Application.persistentDataPath + "/gamedata.json"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, gameData.state);
+            }
             AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
             activity.Call<bool>("moveTaskToBack", true);
         }

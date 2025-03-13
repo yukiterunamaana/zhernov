@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.IO;
 using static Unity.Burst.Intrinsics.X86.Avx;
+using Newtonsoft.Json;
 
 public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -32,7 +33,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             eventData.pointerDrag = null;
             return;
         }
-        Image Tile = Resources.Load<Image>("Prefabs/Building");
+        Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
         millBuilding = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
         millBuilding.sprite = mill;
@@ -42,16 +43,23 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
         y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
         millBuilding.transform.position = new Vector3(x, y, 0);
+        var tile = gameData.state.tiles[x, y];
+        if (tile.type == "water" || tile.obj is not null || tile.building is not null)
+        {
+            millBuilding.color = new Color(0, 0, 0, 0.0f);
+        }
+        else
+        {
+            millBuilding.color = new Color(0, 0, 0, 0.5f);
+        }
     }
     public void OnEndDrag(PointerEventData eventData) {
         millBuilding.color = new Color(1, 1, 1, 1f);
-        if (millBuilding.GetComponent<BuildingObjectScript>().CollidingCount==0)
+        var tile = gameData.state.tiles[x, y];
+        if (tile.type!="water" && tile.obj is null && tile.building is null)
         {
-            millBuilding.GetComponent<BuildingObjectScript>().IsBuilt = true;
             gameData.Score -= 75;
-            gameData.state.buildings.Add(new Building(x, y, "mill"));
-            string save = JsonUtility.ToJson(gameData.state);
-            File.WriteAllText(Application.persistentDataPath + "/gamedata.json", save);
+            gameData.state.tiles[x,y].building = new Building("mill");
         }
         else
         {
