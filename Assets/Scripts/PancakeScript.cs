@@ -16,7 +16,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     public Canvas Canvas;
     public RawImage Tablecloth;
     float speed = 0f;
-    float maxspeed = 300f;
+    float maxspeed = 50f;
     private float timer = 0f;
     float lastClick = 1f;
     private int limitedHeight = 15;

@@ -50,7 +50,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         }
         else
         {
-            millBuilding.color = new Color(0, 0, 0, 0.5f);
+            millBuilding.color = new Color(1, 1, 1, 0.25f);
         }
     }
     public void OnEndDrag(PointerEventData eventData) {

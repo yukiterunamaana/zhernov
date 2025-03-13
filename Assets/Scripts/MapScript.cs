@@ -16,15 +16,24 @@ public class MapScript : MonoBehaviour
     {
         string LevelString;
         string saveFile = Application.persistentDataPath + "/gamedata.json";
-        if (File.Exists(saveFile) && !isEditor)
+        if (!isEditor)
         {
-            LevelString = File.ReadAllText(saveFile);
+            try
+            {
+                LevelString = File.ReadAllText(saveFile);
+            }
+            catch
+            {
+                LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
+
+            }
         }
         else
         {
             LevelString = Resources.Load<TextAsset>("DefaultLevel").text;
         }
         LoadLevel(JsonConvert.DeserializeObject<Level>(LevelString));
+
     }
 
     public void LoadLevel(Level level)
@@ -71,13 +80,7 @@ public class MapScript : MonoBehaviour
     public void SaveLevel()
     {
         //string save = JsonUtility.ToJson(data.state);
-        JsonSerializer serializer = new JsonSerializer();
-        serializer.NullValueHandling = NullValueHandling.Ignore;
-        using (StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json"))
-        using (JsonWriter writer = new JsonTextWriter(sw))
-        {
-            serializer.Serialize(writer, data.state);
-        }
+        GameDataScript.ToJson(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json", data.state);
         //File.WriteAllText(Directory.GetCurrentDirectory() + "/Assets/Resources/DefaultLevel.json", save);
     }
     // Update is called once per frame

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using Newtonsoft.Json;
+using System.IO;
 
 [CreateAssetMenu(fileName = "GameData", menuName = "Game Data", order = 51)]
 public class GameDataScript : ScriptableObject
@@ -31,6 +33,16 @@ public class GameDataScript : ScriptableObject
     public int stackSize = 0;
     public EditorData editorData;
     public int cur_klick = 0;
+    public static void ToJson(string path, object state)
+    {
+        JsonSerializer serializer = new JsonSerializer();
+        serializer.NullValueHandling = NullValueHandling.Ignore;
+        using (StreamWriter sw = new StreamWriter(path))
+        using (JsonWriter writer = new JsonTextWriter(sw))
+        {
+            serializer.Serialize(writer, state);
+        }
+    }
 
 }
 public enum Screen

@@ -18,7 +18,7 @@ public class TableclothScript : MonoBehaviour
     {
         if (started)
         {
-            img.uvRect = new Rect((img.uvRect.x + Time.deltaTime)%0.5f, 0, 2, 1);
+            img.uvRect = new Rect((img.uvRect.x + Time.deltaTime/4)%0.25f, 0, 2, 1);
         }
     }
 }
