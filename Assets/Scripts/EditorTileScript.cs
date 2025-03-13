@@ -24,20 +24,17 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
     { 
         if (GameData.editorData.brush != "none")
         {
-            int x = (int)transform.position.x;
-            int y = (int)transform.position.y;
-            var tyle = GameData.state.tiles[x, y];
             if (GameData.editorData.brushType == "landscape")
             {
                 GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
-                tyle.type = GameData.editorData.brush;
+                GameData.state.tiles[GetComponent<TileScript>().index].type = GameData.editorData.brush;
             }
             else if (GameData.editorData.brushType == "object")
             {
                 var obj = Instantiate(this, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, transform);
                 obj.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
                 Regex regex = new Regex(@"\d");
-                tyle.obj = new ObjectTile(regex.Replace(GameData.editorData.brush, ""), GameData.editorData.brush);
+                GameData.state.objs.Add(new ObjectTile((int)transform.position.x, (int)transform.position.y, regex.Replace(GameData.editorData.brush, ""), GameData.editorData.brush));
             }
         }
     }

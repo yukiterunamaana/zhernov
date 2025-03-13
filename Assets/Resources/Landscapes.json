@@ -1,10 +1,12 @@
-[
-  {
-      "type": "grass",
-      "icon": "grass"
-  },
-  {
-    "type": "water",
-    "icon": "water"
-  }
-]
+{
+    "items": [
+        {
+            "type": "grass",
+            "icon": "grass"
+        },
+        {
+            "type": "water",
+            "icon": "water"
+        }
+    ]
+}

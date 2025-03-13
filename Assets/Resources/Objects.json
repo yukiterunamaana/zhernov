@@ -1,14 +1,16 @@
-[
-  {
-    "tag": "tree",
-    "icon": "tree1"
-  },
-  {
-    "tag": "tree",
-    "icon": "tree2"
-  },
-  {
-    "tag": "tree",
-    "icon": "tree3"
-  }
-]
+{
+  "items": [
+    {
+      "tag": "tree",
+      "icon": "tree1"
+    },
+    {
+      "tag": "tree",
+      "icon": "tree2"
+    },
+    {
+      "tag": "tree",
+      "icon": "tree3"
+    }
+  ]
+}
