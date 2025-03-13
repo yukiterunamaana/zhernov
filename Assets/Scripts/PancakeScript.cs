@@ -33,16 +33,26 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+         /*gameData.cur_klick += 1;
+        if (timer >= 0.25f)
+        {
+            timer = 0f;
+            speed -= 1f * lastClick * lastClick * lastClick;
+            if (speed < 0)
+                speed = 0;
+        }
+        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * 5);*/
+       timer += Time.deltaTime;
         lastClick += Time.deltaTime;
         if (timer >= 0.25f)
         {
             timer = 0f;
-            speed -= 7f * lastClick * lastClick * lastClick;
+            speed -= 1f * lastClick * lastClick * lastClick;
             if (speed < 0)
                 speed = 0;
         }
-        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime);
+        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * 5);
+
     }
     public void OnPointerDown(PointerEventData data)
     {
