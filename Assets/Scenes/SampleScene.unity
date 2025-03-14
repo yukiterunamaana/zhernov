@@ -930,7 +930,7 @@ MonoBehaviour:
   ShopButton: {fileID: 1081267159}
   canvas: {fileID: 2055039691}
   score_tmp: {fileID: 170874368}
-  editorData: {fileID: 11400000, guid: 2f1dc6585181fe44197e1b235f3f54fe, type: 2}
+  editorData: {fileID: 0}
 --- !u!1001 &574314929
 PrefabInstance:
   m_ObjectHideFlags: 0

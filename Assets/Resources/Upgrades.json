@@ -1,0 +1,17 @@
+[
+  {
+    "name": "mod",
+    "cost": 100,
+    "cost_mult": 1.35
+  },
+  {
+    "name": "PPS",
+    "cost": 100,
+    "cost_mult": 1.35
+  },
+  {
+    "name": "add_mod",
+    "cost": 100,
+    "cost_mult": 1.35
+  }
+]

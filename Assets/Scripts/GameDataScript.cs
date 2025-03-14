@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Newtonsoft.Json;
 using System.IO;
+using Unity.VisualScripting.FullSerializer;
 
 public class GameDataScript
 {
@@ -36,6 +37,13 @@ public class GameDataScript
     [JsonIgnore]
     public EditorData editorData;
     public int cur_klick = 0;
+    [JsonIgnore]
+    public Landscape[] landscapes;
+    [JsonIgnore]
+    public MapObject[] objs;
+    [JsonIgnore]
+    public Building[] buildings;
+    public Dictionary<string, int> BuildingCount;
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();
@@ -88,10 +96,33 @@ public class Tile
 public class Building
 {
     public string type;
+    public int cost;
+    public int max;
+    [JsonProperty("upgrades")]
+    public List<string> upgradeList;
+    [JsonIgnore]
+    public Dictionary<string, Upgrade> upgrades;
+    public static Dictionary<string, Upgrade> allUpgrades;
 
     public Building (string type)
     {
         this.type = type;
+    }
+
+    [JsonConstructor]
+    public Building (string type, int cost, int max, List<string> upgradeList)
+    {
+        this.type = type;
+        this.cost = cost;
+        this.max = max;
+        this.upgrades = new();
+        if (upgradeList is not null)
+        {
+            foreach (var u in upgradeList)
+            {
+                this.upgrades.Add(u, allUpgrades[u]);
+            }
+        }
     }
 }
 [System.Serializable]
@@ -117,4 +148,12 @@ public class MapObject
 {
     public string tag;
     public string icon;
+}
+
+public class Upgrade
+{
+    public string name;
+    public int cost;
+    public float cost_mult;
+    public int level = 0;
 }

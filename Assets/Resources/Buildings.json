@@ -1,29 +1,15 @@
-{
-  "items": [
-    {
-      "type": "mill",
-      "max": 1,
-      "upgrades": [
-        {
-          "name": "mod",
-          "cost": 100,
-          "cost_mult": 1.35
-        },
-        {
-          "name": "PPS",
-          "cost": 100,
-          "cost_mult": 1.35
-        },
-        {
-          "name": "add_mod",
-          "cost": 100,
-          "cost_mult": 1.35
-        }
-      ]
-    },
-    {
-      "type": "hut",
-      "cost": 100
-    }
-  ]
-}
+[
+  {
+    "type": "mill",
+    "max": 1,
+    "upgrades": [
+      "mod",
+      "PPS",
+      "add_mod"
+    ]
+  },
+  {
+    "type": "hut",
+    "cost": 100
+  }
+]

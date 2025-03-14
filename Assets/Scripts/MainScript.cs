@@ -41,10 +41,23 @@ public class MainScript : MonoBehaviour
             gameData = new GameDataScript();
             gameData.state = JsonConvert.DeserializeObject<Level>(Resources.Load<TextAsset>("DefaultLevel").text);
         }
+        gameData.editorData = editorData;
+        gameData.landscapes = JsonConvert.DeserializeObject<Landscape[]>(Resources.Load<TextAsset>("Landscapes").text);
+        gameData.objs = JsonConvert.DeserializeObject<MapObject[]>(Resources.Load<TextAsset>("Objects").text);
+        Upgrade[] ups = JsonConvert.DeserializeObject<Upgrade[]>(Resources.Load<TextAsset>("Upgrades").text);
+        Building.allUpgrades = new();
+        foreach (var u in ups)
+        {
+            Building.allUpgrades.Add(u.name, u);
+        }
+        gameData.buildings = JsonConvert.DeserializeObject<Building[]>(Resources.Load<TextAsset>("Buildings").text);
     }
     void Start()
     {
-        LoadScrene(gameData.currentScreen);
+        if (editorData == null)
+        {
+            LoadScrene(gameData.currentScreen);
+        }
 }
 
     // Update is called once per frame

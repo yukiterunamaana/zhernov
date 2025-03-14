@@ -27,7 +27,6 @@ public class MapScript : MonoBehaviour
         {
             LoadLevel(data.state);
         }
-
     }
 
     public void LoadLevel(Level level)
@@ -35,13 +34,11 @@ public class MapScript : MonoBehaviour
         data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Sprite mill = Resources.Load<Sprite>("Sprites/mill");
-        Landscape[] landscapes = JsonConvert.DeserializeObject<Landscape[]>(Resources.Load<TextAsset>("Landscapes").text);
-        MapObject[] objs = JsonConvert.DeserializeObject<MapObject[]>(Resources.Load<TextAsset>("Objects").text);
         Dictionary<string, Sprite> landSprites = new();
-        foreach (var l in landscapes) {
+        foreach (var l in data.landscapes) {
             landSprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
         }
-        foreach (var l in objs)
+        foreach (var l in data.objs)
         {
             landSprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
         }
