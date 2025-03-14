@@ -39,6 +39,12 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
                 Regex regex = new Regex(@"\d");
                 tyle.obj = new ObjectTile(regex.Replace(GameData.editorData.brush, ""), GameData.editorData.brush);
             }
+            else if (GameData.editorData.brushType == "building")
+            {
+                var building = Instantiate(this, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, transform);
+                building.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
+                tyle.building = new Building(GameData.editorData.brush);
+            }
         }
     }
 }
