@@ -42,7 +42,7 @@ public class GameDataScript
     [JsonIgnore]
     public MapObject[] objs;
     [JsonIgnore]
-    public Building[] buildings;
+    public Dictionary<string, Building> buildings;
     public Dictionary<string, int> BuildingCount;
     public static void ToJson(string path, object state)
     {
@@ -88,7 +88,7 @@ public class Level
 public class Tile
 {
     public string type = "grass";
-    public Building building = null;
+    public BuildingObject building = null;
     public ObjectTile obj = null;
 }
 
@@ -104,11 +104,6 @@ public class Building
     public Dictionary<string, Upgrade> upgrades;
     public static Dictionary<string, Upgrade> allUpgrades;
 
-    public Building (string type)
-    {
-        this.type = type;
-    }
-
     [JsonConstructor]
     public Building (string type, int cost, int max, List<string> upgradeList)
     {
@@ -123,6 +118,21 @@ public class Building
                 this.upgrades.Add(u, allUpgrades[u]);
             }
         }
+    }
+}
+[System.Serializable]
+public class BuildingObject
+{
+    public string type;
+    public Dictionary<string, Upgrade> upgrades;
+    public BuildingObject()
+    {
+
+    }
+    public BuildingObject(Building building)
+    {
+        type = building.type;
+        upgrades = building.upgrades;
     }
 }
 [System.Serializable]

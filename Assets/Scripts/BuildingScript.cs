@@ -12,14 +12,19 @@ using Newtonsoft.Json;
 public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     // Start is called before the first frame update
-    Image millBuilding;
+    Image building;
     public Canvas canvas;
     public GameDataScript gameData;
+    Image Tile;
+    public Sprite Sprite;
+    public string type;
     int x;
     int y;
     void Start()
     {
         gameData = MainScript.gameData;
+        Tile = Resources.Load<Image>("Prefabs/Tile");
+        transform.GetChild(0).GetComponent<Image>().sprite = Sprite;
     }
 
     // Update is called once per frame
@@ -34,38 +39,36 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             eventData.pointerDrag = null;
             return;
         }
-        Image Tile = Resources.Load<Image>("Prefabs/Tile");
-        Sprite mill = Resources.Load<Sprite>("Sprites/mill");
-        millBuilding = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
-        millBuilding.sprite = mill;
-        millBuilding.color = new Color(1, 1, 1, 0.5f);
+        building = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
+        building.sprite = Sprite;
+        building.color = new Color(1, 1, 1, 0.5f);
     }
     public void OnDrag(PointerEventData eventData) {
         x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
         y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
-        millBuilding.transform.position = new Vector3(x, y, 0);
+        building.transform.position = new Vector3(x, y, 0);
         var tile = gameData.state.tiles[x, y];
         if (tile.type == "water" || tile.obj is not null || tile.building is not null)
         {
-            millBuilding.color = new Color(0, 0, 0, 0.0f);
+            building.color = new Color(0, 0, 0, 0.0f);
         }
         else
         {
-            millBuilding.color = new Color(1, 1, 1, 0.25f);
+            building.color = new Color(1, 1, 1, 0.25f);
         }
     }
     public void OnEndDrag(PointerEventData eventData) {
-        millBuilding.color = new Color(1, 1, 1, 1f);
+        building.color = new Color(1, 1, 1, 1f);
         var tile = gameData.state.tiles[x, y];
         if (tile.type!="water" && tile.obj is null && tile.building is null)
         {
             gameData.Score -= 75;
-            gameData.state.tiles[x,y].building = new Building("mill");
+            gameData.state.tiles[x,y].building = new BuildingObject(gameData.buildings[type]);
             GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
         }
         else
         {
-            Destroy(millBuilding.gameObject);
+            Destroy(building.gameObject);
         }
     }
 }

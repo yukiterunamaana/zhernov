@@ -33,7 +33,7 @@ public class MapEditorScript : MonoBehaviour
             I.GetComponent<LandscapeButtonScript>().type = l.icon;
             I.GetComponent<LandscapeButtonScript>().brushType = "object";
         }
-        foreach (var l in gameData.buildings)
+        foreach (var l in gameData.buildings.Values)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);

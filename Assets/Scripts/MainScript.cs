@@ -50,7 +50,12 @@ public class MainScript : MonoBehaviour
         {
             Building.allUpgrades.Add(u.name, u);
         }
-        gameData.buildings = JsonConvert.DeserializeObject<Building[]>(Resources.Load<TextAsset>("Buildings").text);
+        Building[] buildings = JsonConvert.DeserializeObject<Building[]>(Resources.Load<TextAsset>("Buildings").text);
+        gameData.buildings = new();
+        foreach (var b in buildings)
+        {
+            gameData.buildings.Add(b.type, b);
+        }
     }
     void Start()
     {

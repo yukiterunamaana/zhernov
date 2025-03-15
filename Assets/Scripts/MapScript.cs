@@ -33,14 +33,17 @@ public class MapScript : MonoBehaviour
     {
         data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
-        Sprite mill = Resources.Load<Sprite>("Sprites/mill");
-        Dictionary<string, Sprite> landSprites = new();
+        Dictionary<string, Sprite> sprites = new();
         foreach (var l in data.landscapes) {
-            landSprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
+            sprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
         }
         foreach (var l in data.objs)
         {
-            landSprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
+            sprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
+        }
+        foreach (var l in data.buildings.Values)
+        {
+            sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
         }
         Image Building = Resources.Load<Image>("Prefabs/Building");
         for (int i=0; i<data.state.width; i++)
@@ -49,7 +52,7 @@ public class MapScript : MonoBehaviour
             {
                 var t = data.state.tiles[i, j];
                 var Cell = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                Cell.sprite = landSprites[t.type];
+                Cell.sprite = sprites[t.type];
                 if (isEditor)
                 {
                     var scr = Cell.AddComponent<EditorTileScript>();
@@ -58,12 +61,12 @@ public class MapScript : MonoBehaviour
                 if (t.building is not null)
                 {
                     Image millBuilding = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                    millBuilding.sprite = mill;
+                    millBuilding.sprite = sprites[t.building.type];
                 }
                 if (t.obj is not null)
                 {
                     Image MapObject = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                    MapObject.sprite = landSprites[t.obj.icon];
+                    MapObject.sprite = sprites[t.obj.icon];
                 }
             }
         }
