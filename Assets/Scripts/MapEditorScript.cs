@@ -51,6 +51,11 @@ public class MapEditorScript : MonoBehaviour
 
     public void CreateLevel()
     {
+        var children = map.transform.GetChild(0).transform;
+        while (children.childCount > 0)
+        {
+            DestroyImmediate(children.GetChild(0).gameObject);
+        }
         map.LoadLevel(new Level(data.width, data.height));
     }
 }

@@ -88,6 +88,7 @@ public class Level
 public class Tile
 {
     public string type = "grass";
+    public bool renderBuilding = true;
     public BuildingObject building = null;
     public ObjectTile obj = null;
 }
@@ -98,6 +99,8 @@ public class Building
     public string type;
     public int cost;
     public int max;
+    public int width = 1;
+    public int height = 1;
     [JsonProperty("upgrades")]
     public List<string> upgradeList;
     [JsonIgnore]
@@ -105,11 +108,13 @@ public class Building
     public static Dictionary<string, Upgrade> allUpgrades;
 
     [JsonConstructor]
-    public Building (string type, int cost, int max, List<string> upgradeList)
+    public Building (string type, int cost, int max, int? width, int? height, List<string> upgradeList)
     {
         this.type = type;
         this.cost = cost;
         this.max = max;
+        if (width is not null) this.width = (int)width;
+        if (height is not null) this.height = (int)height;
         this.upgrades = new();
         if (upgradeList is not null)
         {

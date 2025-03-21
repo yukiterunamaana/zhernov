@@ -53,15 +53,18 @@ public class MapScript : MonoBehaviour
                 var t = data.state.tiles[i, j];
                 var Cell = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
                 Cell.sprite = sprites[t.type];
+                Cell.rectTransform.SetAsFirstSibling();
                 if (isEditor)
                 {
                     var scr = Cell.AddComponent<EditorTileScript>();
                     scr.GameData = data;
                 }
-                if (t.building is not null)
+                if (t.building is not null && t.renderBuilding)
                 {
-                    Image millBuilding = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                    millBuilding.sprite = sprites[t.building.type];
+                    Image building = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+                    building.sprite = sprites[t.building.type];
+                    var b = data.buildings[t.building.type];
+                    building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
                 }
                 if (t.obj is not null)
                 {

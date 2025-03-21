@@ -43,7 +43,21 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
             {
                 var building = Instantiate(this, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity, transform);
                 building.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
+                var btype = GameData.buildings[GameData.editorData.brush];
+                building.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(btype.width, btype.height);
                 tyle.building = new BuildingObject(GameData.buildings[GameData.editorData.brush]);
+                for (int i = 0; i < btype.width; i++)
+                {
+                    for (int j = 0; j < btype.height; j++)
+                    {
+                        if (i == 0 && j == 0)
+                        {
+                            continue;
+                        }
+                        GameData.state.tiles[x + i, y + j].building = tyle.building;
+                        GameData.state.tiles[x + i, y + j].renderBuilding = false;
+                    }
+                }
             }
         }
     }
