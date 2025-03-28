@@ -54,6 +54,24 @@ public class GameDataScript
             serializer.Serialize(writer, state);
         }
     }
+    public void BuildBuilding(int x, int y, string type)
+    {
+        state.tiles[x, y].building = new BuildingObject(buildings[type]);
+        state.tiles[x, y].buildingCenter = new Vector2Int(x, y);
+        var b = buildings[type];
+        for (int i = x; i < x + b.width; i++)
+        {
+            for (int j = y; j < y + b.height; j++)
+            {
+                if (i == x && j == y)
+                {
+                    continue;
+                }
+                state.tiles[i, j].building = state.tiles[x, y].building;
+                state.tiles[i, j].buildingCenter = new Vector2Int(x, y);
+            }
+        }
+    }
 }
 public enum Screen
 {
@@ -78,7 +96,7 @@ public class Level
         {
             for (int j = 0; j < height; j++)
             {
-                tiles[i,j] = new Tile();
+                tiles[i,j] = new Tile(i, j);
             }
         }
     }
@@ -87,10 +105,17 @@ public class Level
 
 public class Tile
 {
+    public int x;
+    public int y;
     public string type = "grass";
-    public bool renderBuilding = true;
     public BuildingObject building = null;
+    public Vector2Int buildingCenter;
     public ObjectTile obj = null;
+    public Tile(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
 }
 
 [System.Serializable]

@@ -18,6 +18,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     Image Tile;
     public Sprite Sprite;
     public string type;
+    Building b;
     int x;
     int y;
     void Start()
@@ -25,6 +26,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         gameData = MainScript.gameData;
         Tile = Resources.Load<Image>("Prefabs/Tile");
         transform.GetChild(0).GetComponent<Image>().sprite = Sprite;
+        b = gameData.buildings[type];
     }
 
     // Update is called once per frame
@@ -34,21 +36,21 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (gameData.Score < 75)
+        if (gameData.Score < b.cost)
         {
             eventData.pointerDrag = null;
             return;
         }
         building = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
         building.sprite = Sprite;
+        building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
         building.color = new Color(1, 1, 1, 0.5f);
     }
     public void OnDrag(PointerEventData eventData) {
         x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
         y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
         building.transform.position = new Vector3(x, y, 0);
-        var tile = gameData.state.tiles[x, y];
-        if (tile.type == "water" || tile.obj is not null || tile.building is not null)
+        if (IsColliding())
         {
             building.color = new Color(0, 0, 0, 0.0f);
         }
@@ -57,13 +59,28 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             building.color = new Color(1, 1, 1, 0.25f);
         }
     }
+    bool IsColliding()
+    {
+        for (int i = x; i < x + b.width; i++)
+        {
+            for (int j = y; j < y + b.height; j++)
+            {
+                var tile = gameData.state.tiles[i, j];
+                if (tile.type == "water" || tile.obj is not null || tile.building is not null)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public void OnEndDrag(PointerEventData eventData) {
         building.color = new Color(1, 1, 1, 1f);
         var tile = gameData.state.tiles[x, y];
-        if (tile.type!="water" && tile.obj is null && tile.building is null)
+        if (!IsColliding())
         {
-            gameData.Score -= 75;
-            gameData.state.tiles[x,y].building = new BuildingObject(gameData.buildings[type]);
+            gameData.Score -= b.cost;
+            gameData.BuildBuilding(x, y, type);
             GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
         }
         else

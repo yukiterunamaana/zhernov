@@ -8,7 +8,8 @@
       "mod",
       "PPS",
       "add_mod"
-    ]
+    ],
+    "cost": 75
   },
   {
     "type": "hut",
