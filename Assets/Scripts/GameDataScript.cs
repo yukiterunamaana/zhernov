@@ -28,10 +28,7 @@ public class GameDataScript
 
         }
     }
-    public int mod = 0;
-    public int PPS = 0;
     public int Klick = 0;
-    public double add_mod = 0;
     public Screen currentScreen = Screen.Grind;
     public int stackSize = 0;
     [JsonIgnore]
@@ -152,7 +149,10 @@ public class MapObject
 
 public class Upgrade
 {
+    public string name_of_change;
     public string name;
+    public string dis;
+    public string image;
     public int cost;
     public float cost_mult;
     public int level = 0;

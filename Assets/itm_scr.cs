@@ -9,7 +9,7 @@ public class itm_scr : MonoBehaviour
     public TMP_Text name;
     public TMP_Text dis;
     public TMP_Text pr;
-    public Image pic;
+    public Sprite pic;
 
     // Start is called before the first frame update
     void Start()

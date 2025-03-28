@@ -1,16 +1,25 @@
 [
   {
-    "name": "mod",
+    "name_of_change": "mod",
+    "name": "Рука",
+    "dis": "+1 блин за клик",
+    "image": "Hand",
     "cost": 100,
     "cost_mult": 1.35
   },
   {
-    "name": "PPS",
+    "name_of_change": "PPS",
+    "name": "Пленный ящер",
+    "dis": "+1 блин в секунду",
+    "image": "Без названия",
     "cost": 100,
     "cost_mult": 1.35
   },
   {
-    "name": "add_mod",
+    "name_of_change": "add_mod",
+    "name": "банк",
+    "dis": "+10% раз в 100 кликов",
+    "image": "images",
     "cost": 100,
     "cost_mult": 1.35
   }

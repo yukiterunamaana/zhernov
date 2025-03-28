@@ -12,12 +12,14 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     public TMP_Text text;
     public int cost = 100;
     public string name_button;
-
+    public Upgrade Upgrade;
     // Start is called before the first frame update
     void Start()
     {
+
         gameData = MainScript.gameData;
-        cost = (int)(100 * Mathf.Pow(1.35f, gameData.mod));
+        Upgrade = Building.allUpgrades[name_button];
+        cost = (int)(Upgrade.cost * Mathf.Pow(Upgrade.cost_mult, Upgrade.level));
         text.text = cost.ToString();
         score_tmp = Camera.main.GetComponent<MainScript>().score_tmp;
     }
@@ -29,9 +31,16 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        switch (name_button)
+        if (gameData.Score >= cost)
         {
-            case  "hand":
+            gameData.Score -= cost;
+            Upgrade.level++;
+            cost = (int)(cost * Upgrade.cost_mult);
+            text.text = cost.ToString();
+        }
+        /*switch (name_button)
+        {
+            case "mod":
                 if (gameData.Score >= cost)
                 {
                     gameData.Score -= cost;
@@ -60,7 +69,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
                     text.text = cost.ToString();
                 }
                 break;
-        }
-        
+        }*/
+
     }
 }
