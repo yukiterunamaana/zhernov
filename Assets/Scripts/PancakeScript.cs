@@ -55,13 +55,13 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * 5);
 
     }
-    public void OnPointerDown(PointerEventData data)
+    public void OnPointerDown(PointerEventData data) //Building.allUpgrades["PPS"].level
     {
-        gameData.Score += 1 + gameData.mod;
+        gameData.Score += 1 + Building.allUpgrades["mod"].level;
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
-            gameData.Score += (int)(gameData.add_mod * (float)gameData.Score);
+            gameData.Score += (int)(Building.allUpgrades["add_mod"].level * 0.01 * (float)gameData.Score);
             gameData.Klick = 0;
         }
         GameObject FallObject=Instantiate(Fall, 
