@@ -6,12 +6,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using System;
+using UnityEngine.EventSystems;
 
 
-public class MapScript : MonoBehaviour
+public class MapScript : MonoBehaviour, IPointerDownHandler
 {
     public Canvas canvas;
+    public Canvas upgradesShop;
     public GameDataScript data;
+    public GameObject ShopList;
     public bool isEditor = false;
     void Start()
     {
@@ -97,6 +100,19 @@ public class MapScript : MonoBehaviour
         if (state.width==0 || state.height == 0)
         {
             throw new ArgumentException("Incorrect map");
+        }
+    }
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        int x = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.x);
+        int y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
+        if (data.state.tiles[x, y].building is not null && data.state.tiles[x, y].building.upgrades.Count > 0)
+        {
+            ShopList.GetComponent<create_up>().MakeList(data.state.tiles[x, y].building.upgrades);
+            upgradesShop.gameObject.SetActive(true);
+        } else
+        {
+            upgradesShop.gameObject.SetActive(false);
         }
     }
 }

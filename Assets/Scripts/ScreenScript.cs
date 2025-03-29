@@ -26,8 +26,8 @@ public class ScreenScript : MonoBehaviour, IDragHandler
         float y = Camera.main.transform.position.y + eventData.delta.y / 100;
         float rX = x + 0.5f + Camera.main.orthographicSize * Camera.main.aspect;
         float rY = y + 0.5f + Camera.main.orthographicSize;
-        float lX = x + 0.5f - Camera.main.orthographicSize * Camera.main.aspect;
-        float lY = y + 0.5f - Camera.main.orthographicSize;
+        float lX = x - 0.5f - Camera.main.orthographicSize * Camera.main.aspect;
+        float lY = y - 0.5f - Camera.main.orthographicSize;
         if (lX > 0 && rX < data.state.width && 
             lY > 0 && rY < data.state.height)
         {

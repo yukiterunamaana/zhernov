@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class TileScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public int index;
-    public int x;
-    public int y;
+    // Start is called before the first frame update\
+    public Canvas upgradesShop;
     void Start()
     {
         
