@@ -9,6 +9,7 @@ using Unity.VisualScripting.FullSerializer;
 
 public class GameDataScript
 {
+    public float CurrentAngle;
     // Start is called before the first frame update
     public static TMP_Text score_tmp;
     private int score = 300;

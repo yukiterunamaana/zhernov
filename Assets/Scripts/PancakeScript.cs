@@ -20,6 +20,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     private float timer = 0f;
     float lastClick = 1f;
     private int limitedHeight = 15;
+    private float RoutateMod = 10;
     //public GameDataScript Mod;
     // Start is called before the first frame update
     void Start()
@@ -34,57 +35,55 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-         /*gameData.cur_klick += 1;
-        if (timer >= 0.25f)
-        {
-            timer = 0f;
-            speed -= 1f * lastClick * lastClick * lastClick;
-            if (speed < 0)
-                speed = 0;
-        }
-        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * 5);*/
-       timer += Time.deltaTime;
+
+        timer += Time.deltaTime;
         lastClick += Time.deltaTime;
         if (timer >= 0.25f)
         {
             timer = 0f;
-            speed -= 1f * lastClick * lastClick * lastClick;
+            speed -= 1f * 5 /** lastClick * lastClick * lastClick*/;
             if (speed < 0)
                 speed = 0;
         }
-        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * 5);
-
+        transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * RoutateMod);
+        gameData.CurrentAngle += speed * Time.deltaTime * RoutateMod;
+        
+        if( gameData.CurrentAngle >= 360) 
+        {
+            gameData.CurrentAngle = 0f + gameData.CurrentAngle / 360;
+            gameData.Score += 1 + Building.allUpgrades["mod"].level;
+            GameObject FallObject = Instantiate(Fall,
+            new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0),
+            Quaternion.identity, StackObject.transform);
+            float fallSpeed = 1.5f * limitedHeight / (1.5f * limitedHeight - gameData.stackSize);
+            FallObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
+            FallObject.transform.GetChild(1).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
+            gameData.stackSize++;
+            if (gameData.stackSize >= limitedHeight)
+            {
+                OldStack = StackObject;
+                StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
+                 Quaternion.identity, Canvas.transform);
+                StackObject.transform.SetAsFirstSibling();
+                gameData.stackSize = 0;
+                Plate = StackObject.transform.GetChild(0);
+            }
+            StartCoroutine(WaitAndCount(OldStack, fallSpeed, gameData.stackSize));
+        }
+        print(gameData.stackSize);
     }
-    public void OnPointerDown(PointerEventData data) //Building.allUpgrades["PPS"].level
+    public void OnPointerDown(PointerEventData data) 
     {
-        gameData.Score += 1 + Building.allUpgrades["mod"].level;
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
             gameData.Score += (int)(Building.allUpgrades["add_mod"].level * 0.01 * (float)gameData.Score);
             gameData.Klick = 0;
         }
-        GameObject FallObject=Instantiate(Fall, 
-            new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0), 
-            Quaternion.identity, StackObject.transform);
-        float fallSpeed = 1.5f*limitedHeight / (1.5f*limitedHeight - gameData.stackSize);
-        FallObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
-        FallObject.transform.GetChild(1).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
         speed += 10f;
         lastClick = 1f;
         if (speed > maxspeed)
             speed = maxspeed;
-        gameData.stackSize++;
-        if (gameData.stackSize == limitedHeight)
-        {
-            OldStack = StackObject;
-            StackObject = Instantiate(Stack, new Vector3(UnityEngine.Device.Screen.width / 2, 0, 0),
-             Quaternion.identity, Canvas.transform);
-            StackObject.transform.SetAsFirstSibling();
-            gameData.stackSize = 0;
-            Plate = StackObject.transform.GetChild(0);
-        }
-        StartCoroutine(WaitAndCount(OldStack, fallSpeed, gameData.stackSize));
     }
     public IEnumerator WaitAndCount(GameObject obj, float fallSpeed, int stackHeight)
     {
