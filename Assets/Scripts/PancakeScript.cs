@@ -70,7 +70,6 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
             }
             StartCoroutine(WaitAndCount(OldStack, fallSpeed, gameData.stackSize));
         }
-        print(gameData.stackSize);
     }
     public void OnPointerDown(PointerEventData data) 
     {
