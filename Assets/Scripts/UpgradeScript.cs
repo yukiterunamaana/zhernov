@@ -38,38 +38,6 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
             cost = (int)(cost * Upgrade.cost_mult);
             text.text = cost.ToString();
         }
-        /*switch (name_button)
-        {
-            case "mod":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.mod += 1;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-
-            case  "lizard":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.PPS++;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-
-            case "bank":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.add_mod += 0.1;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-        }*/
-
+        
     }
 }

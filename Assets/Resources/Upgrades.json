@@ -22,5 +22,13 @@
     "image": "images",
     "cost": 100,
     "cost_mult": 1.35
+  },
+  {
+    "name_of_change": "accelerator",
+    "name": "ускорение",
+    "dis": "ускоряет поворот жеронова за клик",
+    "image": "ускорение",
+    "cost": 100,
+    "cost_mult": 1.35
   }
 ]
