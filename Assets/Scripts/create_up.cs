@@ -43,6 +43,7 @@ public class create_up : MonoBehaviour
                 itemScript.dis.text = upgrade.Value.dis;
                 itemScript.pr.text = upgrade.Value.cost.ToString();
                 newItem.transform.GetChild(0).GetComponent<UpgradeScript>().name_button = upgrade.Value.name_of_change;
+                newItem.transform.GetChild(0).GetComponent<UpgradeScript>().Upgrade = upgrade.Value;
                 Image imageComponent = newItem.transform.GetChild(0).GetChild(2).GetComponent<Image>();
 
                 if (imageComponent != null)

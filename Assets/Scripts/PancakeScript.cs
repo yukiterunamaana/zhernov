@@ -57,11 +57,11 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data) //Building.allUpgrades["PPS"].level
     {
-        gameData.Score += 1 + Building.allUpgrades["mod"].level;
+        gameData.Score += 1 + gameData.gameModifiers["mod"];
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
-            gameData.Score += (int)(Building.allUpgrades["add_mod"].level * 0.01 * (float)gameData.Score);
+            gameData.Score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.Score);
             gameData.Klick = 0;
         }
         GameObject FallObject=Instantiate(Fall, 
