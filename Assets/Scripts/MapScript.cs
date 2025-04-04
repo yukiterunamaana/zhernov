@@ -48,7 +48,6 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
         {
             sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
         }
-        Image Building = Resources.Load<Image>("Prefabs/Building");
         for (int i=0; i<data.state.width; i++)
         {
             for (int j=0; j<data.state.height; j++)
@@ -64,6 +63,13 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                 }
                 if (t.building is not null)
                 {
+                    foreach (var u in data.buildings[t.building.type].upgrades.Keys)
+                    {
+                        if (!t.building.upgrades.ContainsKey(u))
+                        {
+                            t.building.upgrades.Add(u, (Upgrade)Building.allUpgrades[u].Clone());
+                        }
+                    }
                     if (t.buildingCenter.x == i && t.buildingCenter.y == j)
                     {
                         Image building = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);

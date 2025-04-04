@@ -6,6 +6,7 @@ using TMPro;
 using Newtonsoft.Json;
 using System.IO;
 using Unity.VisualScripting.FullSerializer;
+using System;
 
 public class GameDataScript
 {
@@ -189,7 +190,7 @@ public class MapObject
     public string icon;
 }
 
-public class Upgrade
+public class Upgrade: ICloneable
 {
     public string name_of_change;
     public string name;
@@ -198,4 +199,8 @@ public class Upgrade
     public int cost;
     public float cost_mult;
     public int level = 0;
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }
