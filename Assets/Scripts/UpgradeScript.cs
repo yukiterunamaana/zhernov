@@ -18,7 +18,7 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     {
 
         gameData = MainScript.gameData;
-        Upgrade = Building.allUpgrades[name_button];
+       // Upgrade = Building.allUpgrades[name_button];
         cost = (int)(Upgrade.cost * Mathf.Pow(Upgrade.cost_mult, Upgrade.level));
         text.text = cost.ToString();
         score_tmp = Camera.main.GetComponent<MainScript>().score_tmp;
@@ -35,41 +35,9 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
         {
             gameData.Score -= cost;
             Upgrade.level++;
+            gameData.gameModifiers[Upgrade.name_of_change]++;
             cost = (int)(cost * Upgrade.cost_mult);
             text.text = cost.ToString();
         }
-        /*switch (name_button)
-        {
-            case "mod":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.mod += 1;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-
-            case  "lizard":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.PPS++;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-
-            case "bank":
-                if (gameData.Score >= cost)
-                {
-                    gameData.Score -= cost;
-                    gameData.add_mod += 0.1;
-                    cost = (int)(cost * 1.35);
-                    text.text = cost.ToString();
-                }
-                break;
-        }*/
-
     }
 }

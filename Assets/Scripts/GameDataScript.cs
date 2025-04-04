@@ -31,10 +31,10 @@ public class GameDataScript
     }
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;
+    [JsonIgnore]
     public int stackSize = 0;
     [JsonIgnore]
     public EditorData editorData;
-    public int cur_klick = 0;
     [JsonIgnore]
     public Landscape[] landscapes;
     [JsonIgnore]
@@ -42,6 +42,7 @@ public class GameDataScript
     [JsonIgnore]
     public Dictionary<string, Building> buildings;
     public Dictionary<string, int> BuildingCount;
+    public Dictionary<string, int> gameModifiers = new();
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();

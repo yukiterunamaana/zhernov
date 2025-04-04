@@ -49,6 +49,10 @@ public class MainScript : MonoBehaviour
         foreach (var u in ups)
         {
             Building.allUpgrades.Add(u.name_of_change, u);
+            if (!gameData.gameModifiers.ContainsKey(u.name_of_change))
+            {
+                gameData.gameModifiers.Add(u.name_of_change, 0);
+            }
         }
         Building[] buildings = JsonConvert.DeserializeObject<Building[]>(Resources.Load<TextAsset>("Buildings").text);
         gameData.buildings = new();
@@ -71,8 +75,8 @@ public class MainScript : MonoBehaviour
         timer += Time.deltaTime; // Увеличиваем таймер
         if (timer >= 1f) // Если прошла 1 секунда
         {
-            if ((Building.allUpgrades["PPS"].level > 0) & (gameData.currentScreen == Screen.Grind))
-                for (int i = 1; i <= Building.allUpgrades["PPS"].level; i++)
+            if ((gameData.gameModifiers["PPS"] > 0) & (gameData.currentScreen == Screen.Grind))
+                for (int i = 1; i <= gameData.gameModifiers["PPS"]; i++)
                 {
                     System.Random rnd = new System.Random();
                     int x_cor = rnd.Next(-1, 3);
@@ -81,7 +85,7 @@ public class MainScript : MonoBehaviour
                     StartCoroutine(CheckAnimationEnd(instance));
                 }
             timer = 0f; // Сбрасываем таймер
-            gameData.Score += 1 * Building.allUpgrades["PPS"].level;
+            gameData.Score += 1 * gameData.gameModifiers["PPS"];
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
