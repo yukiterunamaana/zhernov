@@ -8,7 +8,9 @@
       "mod",
       "PPS",
       "add_mod",
-      "accelerator"
+      "accelerator",
+      "brakeing",
+      "limit"
     ],
     "cost": 75
   },

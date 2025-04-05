@@ -41,7 +41,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         if (timer >= 0.25f)
         {
             timer = 0f;
-            speed -= 1f * 5 /** lastClick * lastClick * lastClick*/;
+            speed -= (float)(5f - gameData.gameModifiers["brakeing"] * 0.1); /** lastClick * lastClick * lastClick*/;
             if (speed < 0)
                 speed = 0;
         }
@@ -80,8 +80,9 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
             gameData.Score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.Score);
             gameData.Klick = 0;
         }
-        speed += 10f;
+        speed += (float)(10f + (10 * gameData.gameModifiers["accelerator"] * 0.1));
         lastClick = 1f;
+        maxspeed = 50f + gameData.gameModifiers["limit"] * 10;
         if (speed > maxspeed)
             speed = maxspeed;
     }
