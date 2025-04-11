@@ -73,14 +73,13 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data) 
     {
-        gameData.Score += 1 + gameData.gameModifiers["mod"];
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
             gameData.Score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.Score);
             gameData.Klick = 0;
         }
-        speed += (float)(10f + (10 * gameData.gameModifiers["accelerator"] * 0.1));
+        speed += (float)(10f + (10 * gameData.gameModifiers["accelerator"]));
         lastClick = 1f;
         maxspeed = 50f + gameData.gameModifiers["limit"] * 10;
         if (speed > maxspeed)

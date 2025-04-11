@@ -25,12 +25,14 @@ public class MainScript : MonoBehaviour
     public Canvas canvas;
     private float timer = 0f;
     public TMP_Text score_tmp;
+    public TMP_Text score_people_tmp;
     public EditorData editorData;
 
     // Start is called before the first frame update
     private void Awake()
     {
         GameDataScript.score_tmp = score_tmp;
+        GameDataScript.score_people_tmp = score_people_tmp;
         try
         {
             gameData = JsonConvert.DeserializeObject<GameDataScript>(File.ReadAllText(Application.persistentDataPath + "/gamedata.json"));
@@ -67,7 +69,7 @@ public class MainScript : MonoBehaviour
         {
             LoadScrene(gameData.currentScreen);
         }
-}
+    }
 
     // Update is called once per frame
     void Update()

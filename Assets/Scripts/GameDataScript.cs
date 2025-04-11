@@ -27,9 +27,26 @@ public class GameDataScript
             {
                 score_tmp.text = score.ToString() + " <sprite=0>";
             }
-
         }
     }
+    public static TMP_Text score_people_tmp;
+    private int scores = 4;
+    public int Score_People
+    {
+        get
+        {
+            return score;
+        }
+        set
+        {
+            score = value;
+            if (score_people_tmp != null)
+            {
+                score_people_tmp.text = scores.ToString() + " <sprite=0>";
+            }
+        }
+    }
+
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;
     [JsonIgnore]
