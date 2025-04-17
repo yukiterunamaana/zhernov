@@ -81,7 +81,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         {
             gameData.Score -= b.cost;
             gameData.BuildBuilding(x, y, type);
-            GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
+            //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
         }
         else
         {

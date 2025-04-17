@@ -677,10 +677,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 174741332}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 405, y: 90}
-  m_SizeDelta: {x: 0, y: 80}
+  m_AnchorMin: {x: 0.15, y: 0.05}
+  m_AnchorMax: {x: 1, y: 0.35}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &318244795
 MonoBehaviour:
@@ -700,11 +700,11 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 200
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -1113,6 +1113,7 @@ MonoBehaviour:
   ShopButton: {fileID: 1081267159}
   canvas: {fileID: 2055039691}
   score_tmp: {fileID: 170874368}
+  score_people_tmp: {fileID: 0}
   editorData: {fileID: 0}
 --- !u!1001 &605204389
 PrefabInstance:

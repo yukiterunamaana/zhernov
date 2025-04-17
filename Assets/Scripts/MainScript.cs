@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -65,6 +65,7 @@ public class MainScript : MonoBehaviour
     }
     void Start()
     {
+        gameData.Score = gameData.Score;
         if (editorData == null)
         {
             LoadScrene(gameData.currentScreen);
@@ -74,8 +75,8 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime; // Увеличиваем таймер
-        if (timer >= 1f) // Если прошла 1 секунда
+        timer += Time.deltaTime; // Г“ГўГҐГ«ГЁГ·ГЁГўГ ГҐГ¬ ГІГ Г©Г¬ГҐГ°
+        if (timer >= 1f) // Г…Г±Г«ГЁ ГЇГ°Г®ГёГ«Г  1 Г±ГҐГЄГіГ­Г¤Г 
         {
             if ((gameData.gameModifiers["PPS"] > 0) & (gameData.currentScreen == Screen.Grind))
                 for (int i = 1; i <= gameData.gameModifiers["PPS"]; i++)
@@ -86,7 +87,7 @@ public class MainScript : MonoBehaviour
                     new Vector3(x_cor, total_fall.transform.position.y, 0), Quaternion.identity, canvas.transform);
                     StartCoroutine(CheckAnimationEnd(instance));
                 }
-            timer = 0f; // Сбрасываем таймер
+            timer = 0f; // Г‘ГЎГ°Г Г±Г»ГўГ ГҐГ¬ ГІГ Г©Г¬ГҐГ°
             gameData.Score += 1 * gameData.gameModifiers["PPS"];
         }
 
@@ -103,19 +104,19 @@ public class MainScript : MonoBehaviour
         Animator animator = instance.GetComponent<Animator>();
         if (animator != null)
         {
-            // Ждем, пока анимация завершится
+            // Г†Г¤ГҐГ¬, ГЇГ®ГЄГ  Г Г­ГЁГ¬Г Г¶ГЁГї Г§Г ГўГҐГ°ГёГЁГІГ±Гї
             while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
             {
-                yield return null; // Ждем один кадр
+                yield return null; // Г†Г¤ГҐГ¬ Г®Г¤ГЁГ­ ГЄГ Г¤Г°
             }
 
-            // Удаляем объект после завершения анимации
+            // Г“Г¤Г Г«ГїГҐГ¬ Г®ГЎГєГҐГЄГІ ГЇГ®Г±Г«ГҐ Г§Г ГўГҐГ°ГёГҐГ­ГЁГї Г Г­ГЁГ¬Г Г¶ГЁГЁ
             Destroy(instance);
         }
         else
         {
-            Debug.LogError("У объекта нет компонента Animator.");
-            Destroy(instance); // Удаляем объект, если Animator отсутствует
+            Debug.LogError("Г“ Г®ГЎГєГҐГЄГІГ  Г­ГҐГІ ГЄГ®Г¬ГЇГ®Г­ГҐГ­ГІГ  Animator.");
+            Destroy(instance); // Г“Г¤Г Г«ГїГҐГ¬ Г®ГЎГєГҐГЄГІ, ГҐГ±Г«ГЁ Animator Г®ГІГ±ГіГІГ±ГІГўГіГҐГІ
         }
     }
 
