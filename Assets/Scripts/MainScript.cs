@@ -29,6 +29,7 @@ public class MainScript : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        Debug.developerConsoleVisible = false;
         try
         {
             gameData = JsonConvert.DeserializeObject<GameDataScript>(File.ReadAllText(Application.persistentDataPath + "/gamedata.json"));

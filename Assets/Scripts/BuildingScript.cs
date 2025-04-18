@@ -83,7 +83,8 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             gameData.score -= b.cost;
             gameData.BuildBuilding(x, y, type);
             //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
-            if (building.type.ToString() == "hut")
+            var tile = gameData.state.tiles[x, y];
+            if (tile.building.type == "hut")
             {
                 gameData.People += 2;
             }
