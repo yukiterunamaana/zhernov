@@ -1125,8 +1125,6 @@ MonoBehaviour:
   MapButton: {fileID: 967109347}
   ShopButton: {fileID: 1081267159}
   canvas: {fileID: 2055039691}
-  score_tmp: {fileID: 170874368}
-  score_people_tmp: {fileID: 0}
   editorData: {fileID: 0}
 --- !u!1001 &605204389
 PrefabInstance:

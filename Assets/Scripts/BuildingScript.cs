@@ -36,9 +36,11 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        print("Drag began");
         if (gameData.score < b.cost)
         {
             eventData.pointerDrag = null;
+            print("Drag aborted");
             return;
         }
         if (building.type.ToString() == "hut")
