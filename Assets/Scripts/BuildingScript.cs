@@ -41,6 +41,10 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             eventData.pointerDrag = null;
             return;
         }
+        if (building.type.ToString() == "hut")
+        {
+            gameData.People += 2;
+        }
         building = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
         building.sprite = Sprite;
         building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
