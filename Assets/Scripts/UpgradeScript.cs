@@ -21,7 +21,6 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
        // Upgrade = Building.allUpgrades[name_button];
         cost = (int)(Upgrade.cost * Mathf.Pow(Upgrade.cost_mult, Upgrade.level));
         text.text = cost.ToString();
-        score_tmp = Camera.main.GetComponent<MainScript>().score_tmp;
     }
 
     // Update is called once per frame

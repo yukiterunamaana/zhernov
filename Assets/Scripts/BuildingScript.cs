@@ -76,7 +76,6 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     }
     public void OnEndDrag(PointerEventData eventData) {
         building.color = new Color(1, 1, 1, 1f);
-        var tile = gameData.state.tiles[x, y];
         if (!IsColliding())
         {
             gameData.score -= b.cost;

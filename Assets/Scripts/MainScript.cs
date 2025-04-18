@@ -24,8 +24,6 @@ public class MainScript : MonoBehaviour
     public Button ShopButton;
     public Canvas canvas;
     private float timer = 0f;
-    public TMP_Text score_tmp;
-    public TMP_Text score_people_tmp;
     public EditorData editorData;
 
     // Start is called before the first frame update

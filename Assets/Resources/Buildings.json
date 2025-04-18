@@ -16,6 +16,7 @@
   },
   {
     "type": "hut",
-    "cost": 100
+    "cost": 100,
+    "population": 2
   }
 ]
