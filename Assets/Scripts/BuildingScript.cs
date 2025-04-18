@@ -43,10 +43,6 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             print("Drag aborted");
             return;
         }
-        if (building.type.ToString() == "hut")
-        {
-            gameData.People += 2;
-        }
         building = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
         building.sprite = Sprite;
         building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
@@ -87,6 +83,10 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
             gameData.score -= b.cost;
             gameData.BuildBuilding(x, y, type);
             //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
+            if (building.type.ToString() == "hut")
+            {
+                gameData.People += 2;
+            }
         }
         else
         {
