@@ -15,7 +15,7 @@ public class GameDataScript
     public int score = 300;
     public Level state;
     public static TMP_Text score_people_tmp;
-    public int scores = 4;
+    public int People = 4;
 
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;

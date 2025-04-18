@@ -13,6 +13,6 @@ public class ScoreView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TMP_Text>().text = gameData.scores.ToString() + " <sprite=0>" + gameData.score.ToString() + " <sprite=1>";
+        GetComponent<TMP_Text>().text = gameData.People.ToString() + " <sprite=0>" + gameData.score.ToString() + " <sprite=1>";
     }
 }
