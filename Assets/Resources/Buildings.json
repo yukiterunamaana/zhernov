@@ -18,5 +18,13 @@
     "type": "hut",
     "cost": 100,
     "population": 2
+  },
+  {
+    "type": "sawmill",
+    "cost": 150,
+    "resources": [
+      "wood"
+    ],
+    "workers": 1
   }
 ]
