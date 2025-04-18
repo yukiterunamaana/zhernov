@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,7 +51,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         if( gameData.CurrentAngle >= 360) 
         {
             gameData.CurrentAngle = 0f + gameData.CurrentAngle / 360;
-            gameData.Score += 1 + Building.allUpgrades["mod"].level;
+            gameData.score += 1 + Building.allUpgrades["mod"].level;
             GameObject FallObject = Instantiate(Fall,
             new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0),
             Quaternion.identity, StackObject.transform);
@@ -76,7 +76,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
-            gameData.Score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.Score);
+            gameData.score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.score);
             gameData.Klick = 0;
         }
         speed += (float)(10f + (10 * gameData.gameModifiers["accelerator"]));

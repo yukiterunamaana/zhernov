@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -31,9 +31,9 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        if (gameData.Score >= cost)
+        if (gameData.score >= cost)
         {
-            gameData.Score -= cost;
+            gameData.score -= cost;
             Upgrade.level++;
             gameData.gameModifiers[Upgrade.name_of_change]++;
             cost = (int)(cost * Upgrade.cost_mult);

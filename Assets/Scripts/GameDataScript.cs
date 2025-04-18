@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,40 +12,10 @@ public class GameDataScript
 {
     public float CurrentAngle;
     // Start is called before the first frame update
-    public static TMP_Text score_tmp;
-    private int score = 300;
+    public int score = 300;
     public Level state;
-    public int Score {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            score = value;
-            if (score_tmp != null)
-            {
-                score_tmp.text = score.ToString() + " <sprite=0>";
-            }
-        }
-    }
     public static TMP_Text score_people_tmp;
-    private int scores = 4;
-    public int Score_People
-    {
-        get
-        {
-            return score;
-        }
-        set
-        {
-            score = value;
-            if (score_people_tmp != null)
-            {
-                score_people_tmp.text = scores.ToString() + " <sprite=0>";
-            }
-        }
-    }
+    public int scores = 4;
 
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;

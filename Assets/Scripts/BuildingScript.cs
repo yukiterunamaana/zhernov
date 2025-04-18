@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -36,7 +36,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (gameData.Score < b.cost)
+        if (gameData.score < b.cost)
         {
             eventData.pointerDrag = null;
             return;
@@ -79,7 +79,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         var tile = gameData.state.tiles[x, y];
         if (!IsColliding())
         {
-            gameData.Score -= b.cost;
+            gameData.score -= b.cost;
             gameData.BuildBuilding(x, y, type);
             //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
         }
