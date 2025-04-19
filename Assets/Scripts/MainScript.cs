@@ -82,8 +82,10 @@ public class MainScript : MonoBehaviour
         timer += Time.deltaTime; // Óâåëè÷èâàåì òàéìåð
         if (timer >= 1f) // Åñëè ïðîøëà 1 ñåêóíäà
         {
-            //Sawmill
             gameData.resources["wood"] += gameData.wood_per_sec;
+
+
+
             if ((gameData.gameModifiers["PPS"] > 0) & (gameData.currentScreen == Screen.Grind))
                 for (int i = 1; i <= gameData.gameModifiers["PPS"]; i++)
                 {
