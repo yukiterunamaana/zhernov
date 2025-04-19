@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Unity.VisualScripting.FullSerializer;
 using System;
+using UnityEngine.UI;
 
 public class GameDataScript
 {
@@ -30,7 +31,6 @@ public class GameDataScript
     public Dictionary<string, int> BuildingCount;
     public Dictionary<string, int> gameModifiers = new();
     public Dictionary<string, int> resources = new();
-    public int wood_per_sec = 0;
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();
@@ -41,10 +41,12 @@ public class GameDataScript
             serializer.Serialize(writer, state);
         }
     }
-    public void BuildBuilding(int x, int y, string type)
+    public void BuildBuilding(int x, int y, string type, Image building)
     {
         state.tiles[x, y].building = new BuildingObject(buildings[type]);
         state.tiles[x, y].buildingCenter = new Vector2Int(x, y);
+        building.AddComponent<BuildingObjectScript>();
+        building.GetComponent<BuildingObjectScript>().building = state.tiles[x, y].building;
         var b = buildings[type];
         for (int i = x; i < x + b.width; i++)
         {
@@ -118,13 +120,15 @@ public class Building
     [JsonIgnore]
     public Dictionary<string, Upgrade> upgrades;
     public static Dictionary<string, Upgrade> allUpgrades;
+    public int workers;
 
     [JsonConstructor]
-    public Building (string type, int cost, int max, int? width, int? height, List<string> upgradeList)
+    public Building (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers)
     {
         this.type = type;
         this.cost = cost;
         this.max = max;
+        this.workers = workers;
         if (width is not null) this.width = (int)width;
         if (height is not null) this.height = (int)height;
         this.upgrades = new();
@@ -142,6 +146,7 @@ public class BuildingObject
 {
     public string type;
     public Dictionary<string, Upgrade> upgrades;
+    public int workers;
     public BuildingObject()
     {
 
@@ -150,6 +155,7 @@ public class BuildingObject
     {
         type = building.type;
         upgrades = building.upgrades;
+        workers = building.workers;
     }
 }
 [System.Serializable]

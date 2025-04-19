@@ -73,6 +73,8 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                     if (t.buildingCenter.x == i && t.buildingCenter.y == j)
                     {
                         Image building = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
+                        building.AddComponent<BuildingObjectScript>();
+                        building.GetComponent<BuildingObjectScript>().building = t.building;
                         building.sprite = sprites[t.building.type];
                         var b = data.buildings[t.building.type];
                         building.rectTransform.sizeDelta = new Vector2(b.width, b.height);

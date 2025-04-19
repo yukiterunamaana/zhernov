@@ -1,46 +1,36 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class BuildingObjectScript : MonoBehaviour
 {
-    public bool IsBuilt = false;
-    public int CollidingCount = 0;
-    // Start is called before the first frame update
+    public BuildingObject building;
+    float timer;
+    GameDataScript data;
+    int workers = 0;
     void Start()
     {
-        
+        data = MainScript.gameData;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("building") ||other.CompareTag("water") || other.CompareTag("tree"))
+        timer += Time.deltaTime;
+        if (timer>=1f && workers == building.workers)
         {
-            CollidingCount++;
-            if (!IsBuilt)
+            if (building.type=="sawmill")
             {
-                GetComponent<Image>().color = new Color(0, 0, 0, 0.0f);
+                data.resources["wood"] += 2;
             }
+            timer = 0f;
         }
-
-    }
-
-    void OnTriggerExit2D(Collider2D other) 
-    {
-        if (other.CompareTag("building") || other.CompareTag("water") || other.CompareTag("tree"))
+        if (building.workers > workers && data.resources["workers"] > 0)
         {
-            CollidingCount--;
-            if (!IsBuilt && CollidingCount == 0)
-            {
-                GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
-            }
+            workers++;
+            data.resources["workers"]--;
         }
     }
 }

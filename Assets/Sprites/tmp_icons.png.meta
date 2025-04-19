@@ -175,6 +175,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: tmp_icons_2
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 6
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed279be2be9f00346b20511bdaa1618a
+      internalID: 1971305182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -191,6 +213,7 @@ TextureImporter:
     nameFileIdTable:
       tmp_icons_0: 2406288936736227650
       tmp_icons_1: 3183099428258905828
+      tmp_icons_2: 1971305182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

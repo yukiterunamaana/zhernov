@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -45,7 +45,7 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
                 building.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
                 var btype = GameData.buildings[GameData.editorData.brush];
                 building.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(btype.width, btype.height);
-                GameData.BuildBuilding(x, y, GameData.editorData.brush);
+                GameData.BuildBuilding(x, y, GameData.editorData.brush, building.GetComponent<Image>());
             }
         }
     }
