@@ -54,6 +54,14 @@ public class MainScript : MonoBehaviour
             }
         }
         Building[] buildings = JsonConvert.DeserializeObject<Building[]>(Resources.Load<TextAsset>("Buildings").text);
+        Dictionary<string, int> resources = JsonConvert.DeserializeObject<Dictionary<string, int>>(Resources.Load<TextAsset>("Resources").text);
+        foreach (var r in resources)
+        {
+            if (!gameData.resources.ContainsKey(r.Key))
+            {
+                gameData.resources.Add(r.Key, r.Value);
+            }
+        }
         gameData.buildings = new();
         foreach (var b in buildings)
         {
@@ -84,7 +92,7 @@ public class MainScript : MonoBehaviour
                     StartCoroutine(CheckAnimationEnd(instance));
                 }
             timer = 0f; // Ñáðàñûâàåì òàéìåð
-            gameData.score += 1 * gameData.gameModifiers["PPS"];
+            gameData.resources["pancakes"] += 1 * gameData.gameModifiers["PPS"];
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))

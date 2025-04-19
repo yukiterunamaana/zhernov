@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 public class UpgradeScript : MonoBehaviour, IPointerDownHandler
 {
     public GameDataScript gameData;
-    TMP_Text score_tmp;
     public TMP_Text text;
     public int cost = 100;
     public string name_button;
@@ -30,9 +29,9 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData data)
     {
-        if (gameData.score >= cost)
+        if (gameData.resources["pancakes"] >= cost)
         {
-            gameData.score -= cost;
+            gameData.resources["pancakes"] -= cost;
             Upgrade.level++;
             gameData.gameModifiers[Upgrade.name_of_change]++;
             cost = (int)(cost * Upgrade.cost_mult);

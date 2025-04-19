@@ -50,10 +50,8 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         
         if( gameData.CurrentAngle >= 360) 
         {
-            print(gameData.gameModifiers["add_mod"]);
-            print(gameData.Klick);
             gameData.CurrentAngle = 0f + gameData.CurrentAngle / 360;
-            gameData.score += 1 + gameData.gameModifiers["mod"];
+            gameData.resources["pancakes"] += 1 + gameData.gameModifiers["mod"];
             GameObject FallObject = Instantiate(Fall,
             new Vector3(Plate.position.x, Plate.position.y + 20 * gameData.stackSize, 0),
             Quaternion.identity, StackObject.transform);
@@ -78,7 +76,7 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
         gameData.Klick++;
         if (gameData.Klick == 100)
         {
-            gameData.score += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.score); //it coud be fixed
+            gameData.resources["pancakes"] += (int)(gameData.gameModifiers["add_mod"] * 0.01 * (float)gameData.resources["pancakes"]); //it coud be fixed
             gameData.Klick = 0;
         }
         speed += (float)(10f + (10 * gameData.gameModifiers["accelerator"]));

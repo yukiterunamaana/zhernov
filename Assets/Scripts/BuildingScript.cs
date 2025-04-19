@@ -32,15 +32,27 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     // Update is called once per frame
     void Update()
     {
+        if (gameData.resources["pancakes"] < b.cost)
+        {
+            foreach(var img in GetComponentsInChildren<Image>())
+            {
+                img.color = Color.red;
+            }
+        }
+        else
+        {
+            foreach (var img in GetComponentsInChildren<Image>())
+            {
+                img.color = Color.green;
+            }
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        print("Drag began");
-        if (gameData.score < b.cost)
+        if (gameData.resources["pancakes"] < b.cost)
         {
             eventData.pointerDrag = null;
-            print("Drag aborted");
             return;
         }
         building = Instantiate(Tile, new Vector3(0, 0, 0), Quaternion.identity, canvas.transform);
@@ -80,13 +92,14 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         building.color = new Color(1, 1, 1, 1f);
         if (!IsColliding())
         {
-            gameData.score -= b.cost;
+            gameData.resources["pancakes"] -= b.cost;
             gameData.BuildBuilding(x, y, type);
             //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
             var tile = gameData.state.tiles[x, y];
             if (tile.building.type == "hut")
             {
-                gameData.People += 2;
+                gameData.resources["people"] += 2;
+                gameData.resources["workers"] += 2;
             }
         }
         else

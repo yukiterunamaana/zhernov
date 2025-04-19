@@ -12,10 +12,8 @@ public class GameDataScript
 {
     public float CurrentAngle;
     // Start is called before the first frame update
-    public int score = 300;
     public Level state;
     public static TMP_Text score_people_tmp;
-    public int People = 4;
 
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;
@@ -31,6 +29,7 @@ public class GameDataScript
     public Dictionary<string, Building> buildings;
     public Dictionary<string, int> BuildingCount;
     public Dictionary<string, int> gameModifiers = new();
+    public Dictionary<string, int> resources = new();
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();
