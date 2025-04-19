@@ -101,6 +101,10 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 gameData.resources["people"] += 2;
                 gameData.resources["workers"] += 2;
             }
+            if (tile.building.type == "sawmill")
+            {
+                gameData.wood_per_sec += 2;
+            }
         }
         else
         {

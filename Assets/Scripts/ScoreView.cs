@@ -14,6 +14,7 @@ public class ScoreView : MonoBehaviour
     void Update()
     {
         string text = string.Empty;
+        text += gameData.resources["wood"].ToString() + " ";
         text += gameData.resources["workers"].ToString() + "/";
         text += gameData.resources["people"].ToString() + " <sprite=0>";
         text += gameData.resources["pancakes"].ToString() + "<sprite=1>";

@@ -30,6 +30,7 @@ public class GameDataScript
     public Dictionary<string, int> BuildingCount;
     public Dictionary<string, int> gameModifiers = new();
     public Dictionary<string, int> resources = new();
+    public int wood_per_sec = 0;
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();
