@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 4443659609267568715}
   - component: {fileID: 3902737274064104612}
   - component: {fileID: 7884752395377456697}
+  - component: {fileID: 3053186382676712479}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -370,6 +371,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 2
   m_AspectRatio: 1
+--- !u!114 &3053186382676712479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2440656767748197333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b4015a86407c54c99885ab1acad0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 5298107673785393510}
+  cost: 100
+  name_button: hand
 --- !u!1 &3872529534070467031
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +837,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5844075537404563361}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3b4015a86407c54c99885ab1acad0cb, type: 3}
   m_Name: 

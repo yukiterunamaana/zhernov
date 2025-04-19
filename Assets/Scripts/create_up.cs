@@ -46,6 +46,7 @@ public class create_up : MonoBehaviour
                 newItem.transform.GetComponentInChildren<UpgradeScript>().Upgrade = upgrade.Value;
                 Image imageComponent = newItem.transform.GetChild(0).GetChild(2).GetComponent<Image>();
 
+                
                 if (imageComponent != null)
                 {
                     Sprite loadedSprite = Resources.Load<Sprite>("Sprites/" + upgrade.Value.image);
