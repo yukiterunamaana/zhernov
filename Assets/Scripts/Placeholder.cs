@@ -1,11 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class TileScript : MonoBehaviour
+public class Placeholder : MonoBehaviour, IPointerDownHandler
 {
     // Start is called before the first frame update\
-    public Canvas upgradesShop;
     void Start()
     {
         
@@ -15,5 +15,10 @@ public class TileScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+
     }
 }
