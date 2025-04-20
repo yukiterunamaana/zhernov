@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using Newtonsoft.Json;
 using System.IO;
-using Unity.VisualScripting.FullSerializer;
 using System;
+using Model;
 using UnityEngine.UI;
 
 public class GameDataScript
@@ -22,15 +21,10 @@ public class GameDataScript
     public int stackSize = 0;
     [JsonIgnore]
     public EditorData editorData;
-    [JsonIgnore]
-    public Landscape[] landscapes;
-    [JsonIgnore]
-    public MapObject[] objs;
-    [JsonIgnore]
-    public Dictionary<string, Building> buildings;
     public Dictionary<string, int> BuildingCount;
     public Dictionary<string, int> gameModifiers = new();
     public Dictionary<string, int> resources = new();
+
     public static void ToJson(string path, object state)
     {
         JsonSerializer serializer = new JsonSerializer();
@@ -43,11 +37,11 @@ public class GameDataScript
     }
     public void BuildBuilding(int x, int y, string type, Image building)
     {
-        state.tiles[x, y].building = new BuildingObject(buildings[type]);
+        state.tiles[x, y].building = new BuildingObject(MainScript.ConfigManager.Buildings[type]);
         state.tiles[x, y].buildingCenter = new Vector2Int(x, y);
         building.AddComponent<BuildingObjectScript>();
         building.GetComponent<BuildingObjectScript>().building = state.tiles[x, y].building;
-        var b = buildings[type];
+        var b = MainScript.ConfigManager.Buildings[type];
         for (int i = x; i < x + b.width; i++)
         {
             for (int j = y; j < y + b.height; j++)
@@ -107,40 +101,7 @@ public class Tile
     }
 }
 
-[System.Serializable]
-public class Building
-{
-    public string type;
-    public int cost;
-    public int max;
-    public int width = 1;
-    public int height = 1;
-    [JsonProperty("upgrades")]
-    public List<string> upgradeList;
-    [JsonIgnore]
-    public Dictionary<string, Upgrade> upgrades;
-    public static Dictionary<string, Upgrade> allUpgrades;
-    public int workers;
 
-    [JsonConstructor]
-    public Building (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers)
-    {
-        this.type = type;
-        this.cost = cost;
-        this.max = max;
-        this.workers = workers;
-        if (width is not null) this.width = (int)width;
-        if (height is not null) this.height = (int)height;
-        this.upgrades = new();
-        if (upgradeList is not null)
-        {
-            foreach (var u in upgradeList)
-            {
-                this.upgrades.Add(u, allUpgrades[u]);
-            }
-        }
-    }
-}
 [System.Serializable]
 public class BuildingObject
 {
@@ -151,7 +112,7 @@ public class BuildingObject
     {
 
     }
-    public BuildingObject(Building building)
+    public BuildingObject(BuildingConfig building)
     {
         type = building.type;
         upgrades = building.upgrades;
@@ -168,19 +129,6 @@ public class ObjectTile
         this.tag = tag;
         this.icon = icon;
     }
-}
-[System.Serializable]
-public class Landscape
-{
-    public string type;
-    public string icon;
-}
-
-[System.Serializable]
-public class MapObject
-{
-    public string tag;
-    public string icon;
 }
 
 public class Upgrade: ICloneable

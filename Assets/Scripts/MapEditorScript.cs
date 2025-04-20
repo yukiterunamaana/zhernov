@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Config;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,14 +11,15 @@ public class MapEditorScript : MonoBehaviour
     public GameObject shop;
     public EditorData data;
     public GameDataScript gameData;
+    public ConfigManager Configs;
     private MapScript map;
     // Start is called before the first frame update
     void Start()
     {
-        gameData = MainScript.gameData;
+        Configs = MainScript.ConfigManager;
         map = GetComponent<MapScript>();
         Image LandscapeButton = Resources.Load<Image>("Prefabs/EditorLandscape");
-        foreach (var l in gameData.landscapes)
+        foreach (var l in Configs.Landscapes)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);
@@ -25,7 +27,7 @@ public class MapEditorScript : MonoBehaviour
             I.GetComponent<LandscapeButtonScript>().type = l.type;
             I.GetComponent<LandscapeButtonScript>().brushType = "landscape";
         }
-        foreach (var l in gameData.objs)
+        foreach (var l in Configs.Objs)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);
@@ -33,7 +35,7 @@ public class MapEditorScript : MonoBehaviour
             I.GetComponent<LandscapeButtonScript>().type = l.icon;
             I.GetComponent<LandscapeButtonScript>().brushType = "object";
         }
-        foreach (var l in gameData.buildings.Values)
+        foreach (var l in Configs.Buildings.Values)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);

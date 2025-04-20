@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Newtonsoft.Json;
 using System;
+using Model;
 using UnityEngine.EventSystems;
 
 
@@ -37,14 +38,14 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
         data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
         Dictionary<string, Sprite> sprites = new();
-        foreach (var l in data.landscapes) {
+        foreach (var l in MainScript.ConfigManager.Landscapes) {
             sprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
         }
-        foreach (var l in data.objs)
+        foreach (var l in MainScript.ConfigManager.Objs)
         {
             sprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
         }
-        foreach (var l in data.buildings.Values)
+        foreach (var l in MainScript.ConfigManager.Buildings.Values)
         {
             sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
         }
@@ -63,11 +64,11 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                 }
                 if (t.building is not null)
                 {
-                    foreach (var u in data.buildings[t.building.type].upgrades.Keys)
+                    foreach (var u in MainScript.ConfigManager.Buildings[t.building.type].upgrades.Keys)
                     {
                         if (!t.building.upgrades.ContainsKey(u))
                         {
-                            t.building.upgrades.Add(u, (Upgrade)Building.allUpgrades[u].Clone());
+                            t.building.upgrades.Add(u, (Upgrade)BuildingConfig.allUpgrades[u].Clone());
                         }
                     }
                     if (t.buildingCenter.x == i && t.buildingCenter.y == j)
@@ -76,7 +77,7 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                         building.AddComponent<BuildingObjectScript>();
                         building.GetComponent<BuildingObjectScript>().building = t.building;
                         building.sprite = sprites[t.building.type];
-                        var b = data.buildings[t.building.type];
+                        var b = MainScript.ConfigManager.Buildings[t.building.type];
                         building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
                     }
                     else

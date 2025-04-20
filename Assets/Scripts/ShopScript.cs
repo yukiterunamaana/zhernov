@@ -12,7 +12,7 @@ public class ShopScript : MonoBehaviour
     {
         GameData = MainScript.gameData;
         ShopItem = Resources.Load<GameObject>("Prefabs/ShopBuilding");
-        foreach (var b in GameData.buildings.Values)
+        foreach (var b in MainScript.ConfigManager.Buildings.Values)
         {
             var obj = Instantiate(ShopItem, new Vector3(0, 0, 0), Quaternion.identity, transform).GetComponentInChildren<BuildingScript>();
             obj.canvas = Canvas;

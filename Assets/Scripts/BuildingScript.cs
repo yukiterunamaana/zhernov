@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.IO;
+using Model;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using Newtonsoft.Json;
 
@@ -18,7 +19,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
     Image Tile;
     public Sprite Sprite;
     public string type;
-    Building b;
+    BuildingConfig b;
     int x;
     int y;
     void Start()
@@ -26,7 +27,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         gameData = MainScript.gameData;
         Tile = Resources.Load<Image>("Prefabs/Tile");
         transform.GetChild(0).GetComponent<Image>().sprite = Sprite;
-        b = gameData.buildings[type];
+        b = MainScript.ConfigManager.Buildings[type];
     }
 
     // Update is called once per frame
