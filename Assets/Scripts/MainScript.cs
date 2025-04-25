@@ -26,6 +26,7 @@ public class MainScript : MonoBehaviour
     public Button ShopButton;
     public Canvas canvas;
     private float timer = 0f;
+    private float timerfood = 0f;
     public EditorData editorData;
 
     private static ConfigManager _configManager;
@@ -68,6 +69,13 @@ public class MainScript : MonoBehaviour
             timer = 0f; // Ñáðàñûâàåì òàéìåð
             gameData.resources["pancakes"] += 1 * gameData.gameModifiers["PPS"];
         }
+        if (timerfood == 4000)
+        {
+            gameData.resources["pancakes"] -= gameData.resources["workers"] * 2;
+            timerfood = 0f;
+        }
+        timerfood += 1f;
+        print(timerfood);
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
