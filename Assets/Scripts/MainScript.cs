@@ -75,7 +75,6 @@ public class MainScript : MonoBehaviour
             timerfood = 0f;
         }
         timerfood += 1f;
-        print(timerfood);
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {

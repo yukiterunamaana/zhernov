@@ -36,7 +36,7 @@ public class create_up : MonoBehaviour
             GameObject newItem = Instantiate(Upg, transform.position, transform.rotation, transform);
             itm_scr itemScript = newItem.GetComponent<itm_scr>();
 
-
+            print(upgrade.Value.name);
             if (itemScript != null)
             {
                 itemScript.name.text = upgrade.Value.name;
