@@ -46,5 +46,13 @@
     "image": "proekt",
     "cost": 100,
     "cost_mult": 1.35
+  },
+  {
+    "name_of_change": "mill_lvl",
+    "name": "Большая мельница",
+    "dis": "Выводит поселение на новый уровень",
+    "image": "level-up",
+    "cost": 500,
+    "cost_mult": 10000000
   }
 ]
