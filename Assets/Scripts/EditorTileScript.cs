@@ -45,7 +45,7 @@ public class EditorTileScript : MonoBehaviour, IPointerDownHandler
                 building.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + GameData.editorData.brush);
                 var btype = MainScript.ConfigManager.Buildings[GameData.editorData.brush];
                 building.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(btype.width, btype.height);
-                GameData.BuildBuilding(x, y, GameData.editorData.brush, building.GetComponent<Image>());
+                GameData.BuildBuilding(x, y, GameData.editorData.brush);
             }
         }
     }

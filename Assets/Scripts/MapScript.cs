@@ -37,26 +37,15 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
     {
         data.state = level;
         Image Tile = Resources.Load<Image>("Prefabs/Tile");
-        Dictionary<string, Sprite> sprites = new();
-        foreach (var l in MainScript.ConfigManager.Landscapes) {
-            sprites.Add(l.type, Resources.Load<Sprite>("Sprites/"+l.icon));
-        }
-        foreach (var l in MainScript.ConfigManager.Objs)
-        {
-            sprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
-        }
-        foreach (var l in MainScript.ConfigManager.Buildings.Values)
-        {
-            sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
-        }
         for (int i=0; i<data.state.width; i++)
         {
             for (int j=0; j<data.state.height; j++)
             {
                 var t = data.state.tiles[i, j];
                 var Cell = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                Cell.sprite = sprites[t.type];
                 Cell.rectTransform.SetAsFirstSibling();
+                TileScript script = Cell.AddComponent<TileScript>();
+                script.Create(Tile, data.state.tiles[i, j], canvas.transform);
                 if (isEditor)
                 {
                     var scr = Cell.AddComponent<EditorTileScript>();
@@ -71,24 +60,10 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                             t.building.upgrades.Add(u, (Upgrade)BuildingConfig.allUpgrades[u].Clone());
                         }
                     }
-                    if (t.buildingCenter.x == i && t.buildingCenter.y == j)
-                    {
-                        Image building = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                        building.AddComponent<BuildingObjectScript>();
-                        building.GetComponent<BuildingObjectScript>().building = t.building;
-                        building.sprite = sprites[t.building.type];
-                        var b = MainScript.ConfigManager.Buildings[t.building.type];
-                        building.rectTransform.sizeDelta = new Vector2(b.width, b.height);
-                    }
-                    else
+                    if (t.buildingCenter.x != i || t.buildingCenter.y != j)
                     {
                         t.building = data.state.tiles[t.buildingCenter.x, t.buildingCenter.y].building;
                     }
-                }
-                if (t.obj is not null)
-                {
-                    Image MapObject = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
-                    MapObject.sprite = sprites[t.obj.icon];
                 }
             }
         }

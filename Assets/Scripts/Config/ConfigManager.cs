@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Model;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -12,6 +12,7 @@ namespace Config
         public Dictionary<string, BuildingConfig> Buildings;
         public Dictionary<string, int> GameModifiers = new();
         public Dictionary<string, int> GameResources = new();
+        public Dictionary<string, Sprite> Sprites;
 
         private const string ConfigDir = "Configs";
         
@@ -35,6 +36,19 @@ namespace Config
             foreach (var b in buildings)
             {
                 Buildings.Add(b.type, b);
+            }
+            Sprites = new();
+            foreach (var l in Landscapes)
+            {
+                Sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.icon));
+            }
+            foreach (var l in Objs)
+            {
+                Sprites.Add(l.icon, Resources.Load<Sprite>("Sprites/" + l.icon));
+            }
+            foreach (var l in Buildings.Values)
+            {
+                Sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
             }
         }
     }

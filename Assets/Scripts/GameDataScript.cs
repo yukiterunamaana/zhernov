@@ -35,12 +35,10 @@ public class GameDataScript
             serializer.Serialize(writer, state);
         }
     }
-    public void BuildBuilding(int x, int y, string type, Image building)
+    public void BuildBuilding(int x, int y, string type)
     {
         state.tiles[x, y].building = new BuildingObject(MainScript.ConfigManager.Buildings[type]);
         state.tiles[x, y].buildingCenter = new Vector2Int(x, y);
-        building.AddComponent<BuildingObjectScript>();
-        building.GetComponent<BuildingObjectScript>().building = state.tiles[x, y].building;
         var b = MainScript.ConfigManager.Buildings[type];
         for (int i = x; i < x + b.width; i++)
         {

@@ -94,7 +94,7 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
         if (!IsColliding())
         {
             gameData.resources["pancakes"] -= b.cost;
-            gameData.BuildBuilding(x, y, type, building);
+            gameData.BuildBuilding(x, y, type);
             //GameDataScript.ToJson(Application.persistentDataPath + "/gamedata.json", gameData);
             var tile = gameData.state.tiles[x, y];
             if (tile.building.type == "hut")
@@ -103,9 +103,6 @@ public class BuildingScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IE
                 gameData.resources["workers"] += 2;
             }
         }
-        else
-        {
-            Destroy(building.gameObject);
-        }
+        Destroy(building.gameObject);
     }
 }
