@@ -7,7 +7,7 @@ namespace Config
 {
     public class ConfigManager
     {
-        public LandscapeConfig[] Landscapes;
+        public Dictionary<string, LandscapeConfig> Landscapes = new();
         public MapObjectConfig[] Objs;
         public Dictionary<string, BuildingConfig> Buildings;
         public Dictionary<string, int> GameModifiers = new();
@@ -18,7 +18,12 @@ namespace Config
         
         public void Init()
         {
-            Landscapes = JsonConvert.DeserializeObject<LandscapeConfig[]>(Resources.Load<TextAsset>($"{ConfigDir}/Landscapes").text);
+            Landscapes = new();
+            var Ls = JsonConvert.DeserializeObject<LandscapeConfig[]>(Resources.Load<TextAsset>($"{ConfigDir}/Landscapes").text);
+            foreach (var l in Ls)
+            {
+                Landscapes.Add(l.type, l);
+            }
             Objs = JsonConvert.DeserializeObject<MapObjectConfig[]>(Resources.Load<TextAsset>($"{ConfigDir}/Objects").text);
             var ups = JsonConvert.DeserializeObject<Upgrade[]>(Resources.Load<TextAsset>($"{ConfigDir}/Upgrades").text);
             BuildingConfig.allUpgrades = new();
@@ -38,9 +43,12 @@ namespace Config
                 Buildings.Add(b.type, b);
             }
             Sprites = new();
-            foreach (var l in Landscapes)
+            foreach (var l in Landscapes.Values)
             {
-                Sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.icon));
+                foreach (var i in l.icons)
+                {
+                    Sprites.Add(i, Resources.Load<Sprite>("Sprites/" + i));
+                }
             }
             foreach (var l in Objs)
             {

@@ -89,6 +89,7 @@ public class Tile
     public int x;
     public int y;
     public string type = "grass";
+    public List<string> icons;
     public BuildingObject building = null;
     public Vector2Int buildingCenter;
     public ObjectTile obj = null;

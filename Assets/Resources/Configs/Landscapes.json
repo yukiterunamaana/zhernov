@@ -1,10 +1,10 @@
 [
   {
       "type": "grass",
-      "icon": "grass"
+      "icons": ["grass"]
   },
   {
     "type": "water",
-    "icon": "water"
+    "icons": ["water_1", "water_2", "water_3"]
   }
 ]

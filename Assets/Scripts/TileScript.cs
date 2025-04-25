@@ -9,6 +9,8 @@ public class TileScript : MonoBehaviour
     float timer;
     GameDataScript data;
     int workers = 0;
+    float animationTimer;
+    int currentTact=0;
 
     void Start()
     {
@@ -18,7 +20,13 @@ public class TileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Image>().sprite = MainScript.ConfigManager.Sprites[Tile.type];
+        if (animationTimer > 12/24f)
+        {
+            currentTact = (currentTact + 1) % Tile.icons.Count;
+            animationTimer = 0f;
+        }
+        animationTimer += Time.deltaTime;
+        GetComponent<Image>().sprite = MainScript.ConfigManager.Sprites[Tile.icons[currentTact]];
         if (Tile.building is not null && Tile.buildingCenter.x == Tile.x && Tile.buildingCenter.y == Tile.y)
         {
             tileObject.sprite = MainScript.ConfigManager.Sprites[Tile.building.type];

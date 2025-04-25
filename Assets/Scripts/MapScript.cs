@@ -42,6 +42,7 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
             for (int j=0; j<data.state.height; j++)
             {
                 var t = data.state.tiles[i, j];
+                t.icons = MainScript.ConfigManager.Landscapes[t.type].icons;
                 var Cell = Instantiate(Tile, new Vector3(i, j, 0), Quaternion.identity, canvas.transform);
                 Cell.rectTransform.SetAsFirstSibling();
                 TileScript script = Cell.AddComponent<TileScript>();

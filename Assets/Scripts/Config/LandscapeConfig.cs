@@ -1,9 +1,12 @@
+﻿using NUnit.Framework;
+using System.Collections.Generic;
+
 namespace Config
 {
     [System.Serializable]
     public class LandscapeConfig
     {
         public string type;
-        public string icon;
+        public List<string> icons;
     }
 }

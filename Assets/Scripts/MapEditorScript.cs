@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Config;
 using Unity.VisualScripting;
@@ -19,11 +19,11 @@ public class MapEditorScript : MonoBehaviour
         Configs = MainScript.ConfigManager;
         map = GetComponent<MapScript>();
         Image LandscapeButton = Resources.Load<Image>("Prefabs/EditorLandscape");
-        foreach (var l in Configs.Landscapes)
+        foreach (var l in Configs.Landscapes.Values)
         {
             Image I = Instantiate(LandscapeButton, new Vector3(0, 0, 0),
             Quaternion.identity, shop.transform);
-            I.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.icon);
+            I.transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/" + l.type);
             I.GetComponent<LandscapeButtonScript>().type = l.type;
             I.GetComponent<LandscapeButtonScript>().brushType = "landscape";
         }
