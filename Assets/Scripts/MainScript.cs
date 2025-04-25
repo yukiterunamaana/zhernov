@@ -65,17 +65,8 @@ public class MainScript : MonoBehaviour
         timer += Time.deltaTime; // Óâåëè÷èâàåì òàéìåð
         if (timer >= 1f) // Åñëè ïðîøëà 1 ñåêóíäà
         {
-            if ((_configManager.GameModifiers["PPS"] > 0) & (gameData.currentScreen == Screen.Grind))
-                for (int i = 1; i <= _configManager.GameModifiers["PPS"]; i++)
-                {
-                    System.Random rnd = new System.Random();
-                    int x_cor = rnd.Next(-1, 3);
-                    instance = Instantiate(total_fall,
-                    new Vector3(x_cor, total_fall.transform.position.y, 0), Quaternion.identity, canvas.transform);
-                    StartCoroutine(CheckAnimationEnd(instance));
-                }
             timer = 0f; // Ñáðàñûâàåì òàéìåð
-            gameData.resources["pancakes"] += 1 * _configManager.GameModifiers["PPS"];
+            gameData.resources["pancakes"] += 1 * gameData.gameModifiers["PPS"];
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
