@@ -36,7 +36,8 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-        //TextCost.text = (100 * gameData.mod).ToString();
+
+        item.GetComponentsInChildren<TMP_Text>()[1].text = Upgrade.name + " " + (Upgrade.level + 1);
     }
     public void OnPointerDown(PointerEventData data)
     {
