@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Model
@@ -17,9 +17,10 @@ namespace Model
         public Dictionary<string, Upgrade> upgrades;
         public static Dictionary<string, Upgrade> allUpgrades;
         public int workers;
+        public string[] icons;
 
         [JsonConstructor]
-        public BuildingConfig (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers)
+        public BuildingConfig (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers, string[] icons)
         {
             this.type = type;
             this.cost = cost;
@@ -35,6 +36,7 @@ namespace Model
                     this.upgrades.Add(u, allUpgrades[u]);
                 }
             }
+            this.icons = icons;
         }
     }
 }

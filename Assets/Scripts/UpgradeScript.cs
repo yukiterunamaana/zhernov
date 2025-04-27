@@ -10,14 +10,25 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     public GameDataScript gameData;
     public TMP_Text text;
     public int cost = 100;
-    public string name_button;
     public Upgrade Upgrade;
+    public BuildingObject Building;
+    public GameObject item;
     // Start is called before the first frame update
     void Start()
     {
 
         gameData = MainScript.gameData;
-       // Upgrade = Building.allUpgrades[name_button];
+        if (Upgrade.building_level is not null)
+        {
+            if (Building.level != Upgrade.building_level - 1)
+            {
+                item.SetActive(false);
+            }
+            else
+            {
+                cost = Upgrade.cost;
+            }
+        }
         cost = (int)(Upgrade.cost * Mathf.Pow(Upgrade.cost_mult, Upgrade.level));
         text.text = cost.ToString();
     }
@@ -33,8 +44,16 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
         {
             gameData.resources["pancakes"] -= cost;
             Upgrade.level++;
-            gameData.gameModifiers[Upgrade.name_of_change]++;
-            cost = (int)(cost * Upgrade.cost_mult);
+            if (Upgrade.building_level is not null)
+            {
+                Building.level = (int)Upgrade.building_level;
+                item.SetActive(false);
+            }
+            else
+            {
+                gameData.gameModifiers[Upgrade.modifier]++;
+                cost = (int)(cost * Upgrade.cost_mult);
+            }
             text.text = cost.ToString();
         }
     }

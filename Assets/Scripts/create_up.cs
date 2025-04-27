@@ -25,7 +25,7 @@ public class create_up : MonoBehaviour
     {
         //MakeList(Building.allUpgrades);
     }
-    public void MakeList(Dictionary<string, Upgrade> allUpgrades)
+    public void MakeList(Dictionary<string, Upgrade> allUpgrades, BuildingObject building)
     {
         while (transform.childCount > 0)
         {
@@ -35,15 +35,14 @@ public class create_up : MonoBehaviour
         {
             GameObject newItem = Instantiate(Upg, transform.position, transform.rotation, transform);
             itm_scr itemScript = newItem.GetComponent<itm_scr>();
-
-            print(upgrade.Value.name);
             if (itemScript != null)
             {
                 itemScript.name.text = upgrade.Value.name;
                 itemScript.dis.text = upgrade.Value.dis;
                 itemScript.pr.text = upgrade.Value.cost.ToString();
-                newItem.transform.GetComponentInChildren<UpgradeScript>().name_button = upgrade.Value.name_of_change;
                 newItem.transform.GetComponentInChildren<UpgradeScript>().Upgrade = upgrade.Value;
+                newItem.transform.GetComponentInChildren<UpgradeScript>().Building = building;
+                newItem.transform.GetComponentInChildren<UpgradeScript>().item = newItem;
                 Image imageComponent = newItem.transform.GetChild(0).GetChild(2).GetComponent<Image>();
 
                 

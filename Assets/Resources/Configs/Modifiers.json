@@ -1,0 +1,30 @@
+[
+  {
+    "name": "mod",
+    "initial": 0
+  },
+  {
+    "name": "PPS",
+    "initial": 0
+  },
+  {
+    "name": "add_mod",
+    "initial": 0
+  },
+  {
+    "name": "accelerator",
+    "initial": 0
+  },
+  {
+    "name": "brakeing",
+    "initial": 0
+  },
+  {
+    "name": "limit",
+    "initial": 0
+  },
+  {
+    "name": "mill_lvl",
+    "initial": 0
+  }
+]

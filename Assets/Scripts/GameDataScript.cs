@@ -106,7 +106,9 @@ public class BuildingObject
 {
     public string type;
     public Dictionary<string, Upgrade> upgrades;
+    public string[] icons;
     public int workers;
+    public int level = 0;
     public BuildingObject()
     {
 
@@ -116,6 +118,7 @@ public class BuildingObject
         type = building.type;
         upgrades = building.upgrades;
         workers = building.workers;
+        icons = building.icons;
     }
 }
 [System.Serializable]
@@ -132,15 +135,23 @@ public class ObjectTile
 
 public class Upgrade: ICloneable
 {
-    public string name_of_change;
+    public string id;
+    public string modifier;
     public string name;
     public string dis;
     public string image;
     public int cost;
     public float cost_mult;
     public int level = 0;
+    public int? building_level;
     public object Clone()
     {
         return this.MemberwiseClone();
     }
+}
+
+public class Modifier
+{
+    public string name;
+    public int initial;
 }

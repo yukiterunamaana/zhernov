@@ -29,11 +29,12 @@ namespace Config
             BuildingConfig.allUpgrades = new();
             foreach (var u in ups)
             {
-                BuildingConfig.allUpgrades.Add(u.name_of_change, u);
-                if (!GameModifiers.ContainsKey(u.name_of_change))
-                {
-                    GameModifiers.Add(u.name_of_change, 0);
-                }
+                BuildingConfig.allUpgrades.Add(u.id, u);
+            }
+            var gms = JsonConvert.DeserializeObject<Modifier[]>(Resources.Load<TextAsset>($"{ConfigDir}/Modifiers").text);
+            foreach (var m in gms)
+            {
+                GameModifiers.Add(m.name, m.initial);
             }
             GameResources = JsonConvert.DeserializeObject<Dictionary<string, int>>(Resources.Load<TextAsset>($"{ConfigDir}/Resources").text);
             var buildings = JsonConvert.DeserializeObject<BuildingConfig[]>(Resources.Load<TextAsset>($"{ConfigDir}/Buildings").text);
@@ -56,7 +57,10 @@ namespace Config
             }
             foreach (var l in Buildings.Values)
             {
-                Sprites.Add(l.type, Resources.Load<Sprite>("Sprites/" + l.type));
+                foreach (var i in l.icons)
+                {
+                    Sprites.Add(i, Resources.Load<Sprite>("Sprites/" + i));
+                }
             }
         }
     }

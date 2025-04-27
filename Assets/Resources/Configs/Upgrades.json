@@ -1,6 +1,7 @@
 [
   {
-    "name_of_change": "mod",
+    "id": "mod",
+    "modifier": "mod",
     "name": "Рука",
     "dis": "+1 блин за клик",
     "image": "Hand",
@@ -8,7 +9,8 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "PPS",
+    "id": "PPS",
+    "modifier": "PPS",
     "name": "Пленный ящер",
     "dis": "+1 блин в секунду",
     "image": "Без названия",
@@ -16,7 +18,8 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "add_mod",
+    "id": "add_mod",
+    "modifier": "add_mod",
     "name": "банк",
     "dis": "+10% раз в 100 кликов",
     "image": "images",
@@ -24,7 +27,8 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "accelerator",
+    "id": "accelerator",
+    "modifier": "accelerator",
     "name": "ускорение",
     "dis": "ускоряет поворот жеронова за клик",
     "image": "ускорение",
@@ -32,7 +36,8 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "brakeing",
+    "id": "brakeing",
+    "modifier": "brakeing",
     "name": "смазка",
     "dis": "смазывает жернов, стобы тот не так сильно тормазил",
     "image": "oil",
@@ -40,7 +45,8 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "limit",
+    "id": "limit",
+    "modifier": "limit",
     "name": "усиленные лопости",
     "dis": "увеличиват максимальную скорость вращения жернова",
     "image": "proekt",
@@ -48,11 +54,11 @@
     "cost_mult": 1.35
   },
   {
-    "name_of_change": "mill_lvl",
+    "id": "mill_lvl",
+    "building_level": 1,
     "name": "Большая мельница",
     "dis": "Выводит поселение на новый уровень",
     "image": "level-up",
-    "cost": 500,
-    "cost_mult": 10000000
+    "cost": 200
   }
 ]

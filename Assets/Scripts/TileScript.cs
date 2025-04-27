@@ -20,7 +20,7 @@ public class TileScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (animationTimer > 12/24f)
+        if (animationTimer > 1 / (float)Tile.icons.Count)
         {
             currentTact = (currentTact + 1) % Tile.icons.Count;
             animationTimer = 0f;
@@ -29,7 +29,7 @@ public class TileScript : MonoBehaviour
         GetComponent<Image>().sprite = MainScript.ConfigManager.Sprites[Tile.icons[currentTact]];
         if (Tile.building is not null && Tile.buildingCenter.x == Tile.x && Tile.buildingCenter.y == Tile.y)
         {
-            tileObject.sprite = MainScript.ConfigManager.Sprites[Tile.building.type];
+            tileObject.sprite = MainScript.ConfigManager.Sprites[Tile.building.icons[Tile.building.level]];
             var b = MainScript.ConfigManager.Buildings[Tile.building.type];
             tileObject.rectTransform.sizeDelta = new Vector2(b.width, b.height);
             tileObject.color = Color.white;

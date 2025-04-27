@@ -1,6 +1,10 @@
 [
   {
     "type": "mill",
+    "icons": [
+      "mill_0",
+      "mill_1"
+    ],
     "max": 1,
     "width": 2,
     "height":  2,
@@ -18,11 +22,17 @@
   },
   {
     "type": "hut",
+    "icons": [
+      "hut"
+    ],
     "cost": 100,
     "population": 2
   },
   {
     "type": "sawmill",
+    "icons": [
+      "sawmill"
+    ],
     "cost": 150,
     "resources": [
       "wood"

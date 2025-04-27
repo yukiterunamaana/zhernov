@@ -60,11 +60,16 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
                         {
                             t.building.upgrades.Add(u, (Upgrade)BuildingConfig.allUpgrades[u].Clone());
                         }
+                        else if (t.building.upgrades[u].modifier is null)
+                        {
+                            t.building.upgrades[u].modifier = BuildingConfig.allUpgrades[u].modifier;
+                        }
                     }
                     if (t.buildingCenter.x != i || t.buildingCenter.y != j)
                     {
                         t.building = data.state.tiles[t.buildingCenter.x, t.buildingCenter.y].building;
                     }
+                    t.building.icons = MainScript.ConfigManager.Buildings[t.building.type].icons;
                 }
             }
         }
@@ -93,7 +98,7 @@ public class MapScript : MonoBehaviour, IPointerDownHandler
         int y = Mathf.FloorToInt(eventData.pointerCurrentRaycast.worldPosition.y);
         if (data.state.tiles[x, y].building is not null && data.state.tiles[x, y].building.upgrades.Count > 0)
         {
-            ShopList.GetComponent<create_up>().MakeList(data.state.tiles[x, y].building.upgrades);
+            ShopList.GetComponent<create_up>().MakeList(data.state.tiles[x, y].building.upgrades, data.state.tiles[x, y].building);
             upgradesShop.gameObject.SetActive(true);
         } else
         {
