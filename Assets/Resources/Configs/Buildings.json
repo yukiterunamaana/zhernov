@@ -2,8 +2,8 @@
   {
     "type": "mill",
     "icons": [
-      "mill_0",
-      "mill_1"
+      ["mill_0", "mill_01"],
+      ["mill_1", "mill_11"]
     ],
     "max": 1,
     "width": 2,
@@ -23,7 +23,7 @@
   {
     "type": "hut",
     "icons": [
-      "hut"
+      ["hut"]
     ],
     "cost": 100,
     "population": 2
@@ -31,11 +31,11 @@
   {
     "type": "sawmill",
     "icons": [
-      "sawmill"
+      ["sawmill"]
     ],
     "cost": 150,
     "resources": [
-      "wood"
+      ["wood"]
     ],
     "workers": 1
   }

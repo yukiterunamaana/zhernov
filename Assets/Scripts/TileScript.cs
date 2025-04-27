@@ -10,7 +10,9 @@ public class TileScript : MonoBehaviour
     GameDataScript data;
     int workers = 0;
     float animationTimer;
+    float animationBuildingTimer;
     int currentTact=0;
+    int currentBuildTact = 0;
 
     void Start()
     {
@@ -29,7 +31,14 @@ public class TileScript : MonoBehaviour
         GetComponent<Image>().sprite = MainScript.ConfigManager.Sprites[Tile.icons[currentTact]];
         if (Tile.building is not null && Tile.buildingCenter.x == Tile.x && Tile.buildingCenter.y == Tile.y)
         {
-            tileObject.sprite = MainScript.ConfigManager.Sprites[Tile.building.icons[Tile.building.level]];
+            if (animationBuildingTimer > 1 / (float)Tile.building.icons[Tile.building.level].Length)
+            {
+                currentBuildTact = (currentBuildTact + 1) % Tile.building.icons[Tile.building.level].Length;
+                animationBuildingTimer = 0f;
+            }
+            animationBuildingTimer += Time.deltaTime;
+            animationTimer += Time.deltaTime;
+            tileObject.sprite = MainScript.ConfigManager.Sprites[Tile.building.icons[Tile.building.level][currentBuildTact]];
             var b = MainScript.ConfigManager.Buildings[Tile.building.type];
             tileObject.rectTransform.sizeDelta = new Vector2(b.width, b.height);
             tileObject.color = Color.white;

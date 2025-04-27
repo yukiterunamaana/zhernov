@@ -17,10 +17,10 @@ namespace Model
         public Dictionary<string, Upgrade> upgrades;
         public static Dictionary<string, Upgrade> allUpgrades;
         public int workers;
-        public string[] icons;
+        public string[][] icons;
 
         [JsonConstructor]
-        public BuildingConfig (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers, string[] icons)
+        public BuildingConfig (string type, int cost, int max, int? width, int? height, List<string> upgradeList, int workers, string[][] icons)
         {
             this.type = type;
             this.cost = cost;

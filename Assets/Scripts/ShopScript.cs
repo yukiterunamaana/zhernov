@@ -14,6 +14,8 @@ public class ShopScript : MonoBehaviour
         ShopItem = Resources.Load<GameObject>("Prefabs/ShopBuilding");
         foreach (var b in MainScript.ConfigManager.Buildings.Values)
         {
+            if (b.max == 1)
+                continue;
             var obj = Instantiate(ShopItem, new Vector3(0, 0, 0), Quaternion.identity, transform).GetComponentInChildren<BuildingScript>();
             obj.canvas = Canvas;
             obj.Sprite = Resources.Load<Sprite>("Sprites/" + b.type);

@@ -59,7 +59,10 @@ namespace Config
             {
                 foreach (var i in l.icons)
                 {
-                    Sprites.Add(i, Resources.Load<Sprite>("Sprites/" + i));
+                    foreach (var j in i)
+                    {
+                        Sprites.Add(j, Resources.Load<Sprite>("Sprites/" + j));
+                    }
                 }
             }
         }

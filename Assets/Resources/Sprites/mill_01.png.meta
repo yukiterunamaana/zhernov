@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 82e483d307e05c84aa12b3ac63a1fbaa
+guid: 0833bdfb7374592468b343051a4e9888
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -762052458543856080
-    second: mill_0
+      213: 7470497778979768586
+    second: mill_01_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -114,7 +114,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,7 +126,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: mill_0
+      name: mill_01_0
       rect:
         serializedVersion: 2
         x: 1
@@ -134,15 +134,15 @@ TextureImporter:
         width: 30
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 036c7449355ac65f0800000000000000
-      internalID: -762052458543856080
+      spriteID: a090f6b462a8ca760800000000000000
+      internalID: 7470497778979768586
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      mill_0: -762052458543856080
+      mill_01_0: 7470497778979768586
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

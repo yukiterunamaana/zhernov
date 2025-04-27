@@ -106,7 +106,7 @@ public class BuildingObject
 {
     public string type;
     public Dictionary<string, Upgrade> upgrades;
-    public string[] icons;
+    public string[][] icons;
     public int workers;
     public int level = 0;
     public BuildingObject()
