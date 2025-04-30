@@ -36,8 +36,14 @@ public class UpgradeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
-
-        item.GetComponentsInChildren<TMP_Text>()[1].text = Upgrade.name + " " + (Upgrade.level + 1);
+        if (Upgrade.level > 0)
+        {
+            item.GetComponentsInChildren<TMP_Text>()[1].text = Upgrade.name + " " + Upgrade.level;
+        }
+        else
+        {
+            item.GetComponentsInChildren<TMP_Text>()[1].text = Upgrade.name;
+        }
     }
     public void OnPointerDown(PointerEventData data)
     {
