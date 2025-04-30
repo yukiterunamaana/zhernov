@@ -17,6 +17,8 @@ namespace DefaultNamespace
         public Canvas Canvas;
         public RawImage Tablecloth;
 
+        public float FallSpeed => 1.5f * Model.limitedHeight / (1.5f * Model.limitedHeight - Model.stackSize);
+        
         void Start()
         {
             Fall = Resources.Load<GameObject>("Prefabs/Fall");
@@ -38,11 +40,8 @@ namespace DefaultNamespace
             var FallObject = Instantiate(Fall,
                 new Vector3(Plate.position.x, Plate.position.y + 20 * Model.stackSize, 0),
                 Quaternion.identity, StackObject.transform);
-            var fallSpeed = 1.5f * Model.limitedHeight / (1.5f * Model.limitedHeight - Model.stackSize);
-            FallObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
-            FallObject.transform.GetChild(1).GetComponent<Animator>().SetFloat("Speed", fallSpeed);
-            if (OldStack != null)
-                StartCoroutine(WaitAndCount(OldStack, fallSpeed, Model.stackSize));
+            FallObject.transform.GetChild(0).GetComponent<Animator>().SetFloat("Speed", FallSpeed);
+            FallObject.transform.GetChild(1).GetComponent<Animator>().SetFloat("Speed", FallSpeed);
         }
 
         public void OnStackFull()
@@ -52,6 +51,7 @@ namespace DefaultNamespace
                 Quaternion.identity, Canvas.transform);
             StackObject.transform.SetAsFirstSibling();
             Plate = StackObject.transform.GetChild(0);
+            StartCoroutine(WaitAndCount(OldStack));
         }
 
         public void OnPointerDown(PointerEventData data)
@@ -59,15 +59,12 @@ namespace DefaultNamespace
             Model.HandleClick();
         }
 
-        public IEnumerator WaitAndCount(GameObject obj, float fallSpeed, int stackHeight)
+        public IEnumerator WaitAndCount(GameObject obj)
         {
-            yield return new WaitForSeconds(1 / fallSpeed);
-            if (stackHeight == 0)
-            {
-                obj.GetComponent<Animator>().SetBool("Move", true);
-                StartCoroutine(WaitAndDelete(obj));
-                Tablecloth.GetComponent<TableclothScript>().started = true;
-            }
+            yield return new WaitForSeconds(1 / FallSpeed);
+            obj.GetComponent<Animator>().SetBool("Move", true);
+            StartCoroutine(WaitAndDelete(obj));
+            Tablecloth.GetComponent<TableclothScript>().started = true;
         }
 
         public IEnumerator WaitAndDelete(GameObject obj)
