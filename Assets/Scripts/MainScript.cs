@@ -14,6 +14,7 @@ public class MainScript : MonoBehaviour
 {
     public static GameDataScript gameData;
     public static ConfigManager ConfigManager => _configManager;
+    public static PancakeModel PancakeModel => _pancakeModel;
     public GameObject total_fall;
     public GameObject TasksCanvas;
     public GameObject GrindCanvas;
@@ -30,6 +31,7 @@ public class MainScript : MonoBehaviour
     public EditorData editorData;
 
     private static ConfigManager _configManager;
+    private static PancakeModel _pancakeModel;
 
     // Start is called before the first frame update
     private void Awake()
@@ -51,6 +53,7 @@ public class MainScript : MonoBehaviour
         gameData.editorData = editorData;
         gameData.resources = new Dictionary<string, int>(_configManager.GameResources);
         gameData.gameModifiers = new Dictionary<string, int>(_configManager.GameModifiers);
+        _pancakeModel = new PancakeModel(gameData);
     }
     void Start()
     {
@@ -83,7 +86,7 @@ public class MainScript : MonoBehaviour
             activity.Call<bool>("moveTaskToBack", true);
         }
 
-
+        PancakeModel.Update();
     }
     private IEnumerator CheckAnimationEnd(GameObject instance)
     {

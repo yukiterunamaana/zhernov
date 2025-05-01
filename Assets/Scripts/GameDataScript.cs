@@ -10,15 +10,12 @@ using UnityEngine.UI;
 
 public class GameDataScript
 {
-    public float CurrentAngle;
     // Start is called before the first frame update
     public Level state;
     public static TMP_Text score_people_tmp;
 
     public int Klick = 0;
     public Screen currentScreen = Screen.Grind;
-    [JsonIgnore]
-    public int stackSize = 0;
     [JsonIgnore]
     public EditorData editorData;
     public Dictionary<string, int> BuildingCount;
