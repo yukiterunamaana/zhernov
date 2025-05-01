@@ -29,6 +29,7 @@ public class MainScript : MonoBehaviour
     private float timerfood = 0f;
     public EditorData editorData;
 
+    PancakeScript pancakeScript = new PancakeScript();
     private static ConfigManager _configManager;
 
     // Start is called before the first frame update
@@ -63,10 +64,13 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime; // Óâåëè÷èâàåì òàéìåð
-        if (timer >= 1f) // Åñëè ïðîøëà 1 ñåêóíäà
+        //pancakeScript.pancake_turn();
+
+
+        timer += Time.deltaTime; 
+        if (timer >= 1f) 
         {
-            timer = 0f; // Ñáðàñûâàåì òàéìåð
+            timer = 0f; 
             gameData.resources["pancakes"] += 1 * gameData.gameModifiers["PPS"];
         }
         if (timerfood == 4000)

@@ -21,6 +21,19 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     float lastClick = 1f;
     private int limitedHeight = 15;
     private float RoutateMod = 10;
+
+    public void turn()
+    {
+        timer += Time.deltaTime;
+        lastClick += Time.deltaTime;
+        if (timer >= 0.25f)
+        {
+            timer = 0f;
+            speed -= (float)(5f - gameData.gameModifiers["brakeing"] * 0.1); /** lastClick * lastClick * lastClick*/;
+            if (speed < 0)
+                speed = 0;
+        }
+    }
     //public GameDataScript Mod;
     // Start is called before the first frame update
     void Start()
@@ -35,16 +48,8 @@ public class PancakeScript : MonoBehaviour, IPointerDownHandler
     // Update is called once per frame
     void Update()
     {
+        turn();
 
-        timer += Time.deltaTime;
-        lastClick += Time.deltaTime;
-        if (timer >= 0.25f)
-        {
-            timer = 0f;
-            speed -= (float)(5f - gameData.gameModifiers["brakeing"] * 0.1); /** lastClick * lastClick * lastClick*/;
-            if (speed < 0)
-                speed = 0;
-        }
         transform.RotateAround(transform.position, Vector3.back, speed * Time.deltaTime * RoutateMod);
         gameData.CurrentAngle += speed * Time.deltaTime * RoutateMod;
         

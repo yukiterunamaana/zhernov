@@ -142,6 +142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorData: {fileID: 11400000, guid: 2f1dc6585181fe44197e1b235f3f54fe, type: 2}
   type: 
+  brushType: 
 --- !u!1 &8382100074125749976
 GameObject:
   m_ObjectHideFlags: 0
